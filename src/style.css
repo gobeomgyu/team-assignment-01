@@ -131,7 +131,7 @@ body {
   display: flex;
   gap: 20px;
   width: 100%;
-  max-width: 1040px;
+  max-width: 1060px;
   justify-content: space-between;
   margin: 0 auto;
 }
@@ -198,7 +198,7 @@ body {
   background-color: white;
   border-radius: 20px;
   width: 100%;
-  max-width: 1170px;
+  max-width: 1190px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
   overflow: hidden;
   position: relative;
@@ -262,12 +262,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 400px;
+  min-height: 420px;
 }
 
 .member-image-container img {
   max-width: 100%;
-  max-height: 400px;
+  max-height: 420px;
   object-fit: contain;
   /* Add a soft shadow */
   filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
