@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>팀원 도감</title>
-    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body class="member-body">
     <header class="pokedex-header">
-      <a href="/" class="back-button">&lt; 메인으로</a>
+      <a href="./" class="back-button">&lt; 메인으로</a>
       <div class="nav-buttons">
         <button id="prev-btn" class="nav-btn">
           <span class="nav-arrow">&lt;</span>
@@ -30,7 +30,10 @@
       <div class="pokedex-card">
         <div class="card-header">
           <span class="member-no" id="member-no">No. 0000</span>
-          <h1 class="member-name" id="member-name">이름</h1>
+          <h1 class="member-name" id="member-name">
+            <span class="member-pokemon-name" id="member-pokemon-name">이름</span>
+            <span class="member-real-name" id="member-real-name">(이름)</span>
+          </h1>
           <span class="member-tag">팀원 (Team Member)</span>
         </div>
         <p class="member-desc" id="member-desc">
@@ -69,19 +72,13 @@
               <span class="info-label">특성</span>
               <span class="info-value"><span id="member-ability">특성명</span> <span class="help-icon">?</span></span>
             </div>
-            <div class="info-item">
-              <span class="info-label">취미</span>
-              <span class="info-value">알 수 없음</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">특기</span>
-              <span class="info-value">알 수 없음</span>
-            </div>
           </div>
         </div>
-
+        <div class="card-footer">
+          <button class="action-btn" type="button">상품 보러가기 &gt;</button>
+        </div>
       </div>
     </main>
-    <script type="module" src="/src/member.ts"></script>
+    <script type="module" src="./src/member.ts"></script>
   </body>
 </html>

@@ -20,15 +20,17 @@ function getTypeLabel(type: string): string {
 
 function renderMember(member: Member) {
   // Update Header Elements
-  document.title = `${member.name} - 팀원 도감`;
+  document.title = `${member.pokemonName} (${member.name}) - 팀원 도감`;
   
   const noEl = document.getElementById('member-no');
-  const nameEl = document.getElementById('member-name');
+  const pokemonNameEl = document.getElementById('member-pokemon-name');
+  const realNameEl = document.getElementById('member-real-name');
   const descEl = document.getElementById('member-desc');
   const imageEl = document.getElementById('member-image') as HTMLImageElement;
   
   if (noEl) noEl.textContent = member.no;
-  if (nameEl) nameEl.textContent = member.name;
+  if (pokemonNameEl) pokemonNameEl.textContent = member.pokemonName;
+  if (realNameEl) realNameEl.textContent = `(${member.name})`;
   if (descEl) descEl.textContent = member.desc;
   if (imageEl) imageEl.src = member.image;
 
@@ -80,7 +82,7 @@ function renderMember(member: Member) {
     const prevName = document.getElementById('prev-name');
     if (prevNo) prevNo.textContent = prevMember.no;
     if (prevName) prevName.textContent = prevMember.name;
-    prevBtn.onclick = () => { window.location.href = `/member.html?id=${prevMember.id}`; };
+    prevBtn.onclick = () => { window.location.href = `${import.meta.env.BASE_URL}member.html?id=${prevMember.id}`; };
   }
 
   if (nextBtn) {
@@ -88,7 +90,7 @@ function renderMember(member: Member) {
     const nextName = document.getElementById('next-name');
     if (nextNo) nextNo.textContent = nextMember.no;
     if (nextName) nextName.textContent = nextMember.name;
-    nextBtn.onclick = () => { window.location.href = `/member.html?id=${nextMember.id}`; };
+    nextBtn.onclick = () => { window.location.href = `${import.meta.env.BASE_URL}member.html?id=${nextMember.id}`; };
   }
 }
 
