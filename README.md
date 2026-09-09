@@ -26,3 +26,23 @@
 ### 내가 좋아하는 명언
 
 > "신발이 없음을 한탄하다가 거리에서 발이 없는 사람을 만났다."
+
+## 팀원이 코드 가져와서 실행하기
+
+이 저장소에는 사이트를 실행하는 실제 소스 코드가 모두 포함되어 있습니다. Visual Studio Code 터미널에서 아래 명령어를 순서대로 실행하면 됩니다.
+
+```bash
+git clone https://github.com/gobeomgyu/team-assignment-01.git
+cd team-assignment-01
+npm install
+npm run dev
+```
+
+터미널에 표시되는 주소를 `Ctrl`을 누른 채 클릭하면 사이트가 열립니다. `127.0.0.1` 주소는 실행한 사람의 컴퓨터에서만 열립니다.
+
+Git을 사용하지 않는 경우에는 GitHub의 초록색 **Code** 버튼을 누른 뒤 **Download ZIP**을 선택하고, 압축을 푼 폴더를 Visual Studio Code에서 열면 됩니다. 그다음 터미널에서 아래 명령어를 실행합니다.
+
+```bash
+npm install
+npm run dev
+```
