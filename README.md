@@ -36,49 +36,204 @@ npm run dev
 
 터미널에 표시되는 로컬 주소를 브라우저에서 열면 됩니다.
 
-## 팀원 작업 및 업로드 방법
+## 주요 코드
 
-처음 참여하는 팀원은 아래 명령어를 순서대로 실행합니다.
+아래 항목을 펼치면 사이트의 핵심 코드를 README에서 바로 확인할 수 있습니다.
 
-```bash
-git clone https://github.com/gobeomgyu/team-assignment-01.git
-cd team-assignment-01
-npm install
-git switch -c feature/본인이름
+<details open>
+<summary><strong>포켓몬볼 영상 재생 및 페이지 이동 — src/main.ts</strong></summary>
+
+```ts
+import { members } from './data';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('pokeballs-container');
+  if (!container) return;
+
+  members.forEach(member => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'pokeball-wrapper';
+    wrapper.setAttribute('role', 'button');
+    wrapper.setAttribute('tabindex', '0');
+    wrapper.setAttribute('aria-label', `${member.name} 도감 열기`);
+
+    const pokeball = document.createElement('div');
+    pokeball.className = 'pokeball-image';
+
+    const video = document.createElement('video');
+    video.className = 'pokeball-video';
+    video.src = `${import.meta.env.BASE_URL}videos/pokeball-opening.mp4`;
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+    video.setAttribute('aria-hidden', 'true');
+
+    let isPlaying = false;
+
+    const openMember = () => {
+      window.location.href = `${import.meta.env.BASE_URL}member.html?id=${member.id}`;
+    };
+
+    const playOpeningVideo = () => {
+      if (isPlaying) return;
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        openMember();
+        return;
+      }
+
+      isPlaying = true;
+      wrapper.classList.add('is-playing');
+      wrapper.setAttribute('aria-busy', 'true');
+      video.currentTime = 0;
+
+      void video.play().catch(() => {
+        isPlaying = false;
+        wrapper.classList.remove('is-playing');
+        wrapper.removeAttribute('aria-busy');
+        openMember();
+      });
+    };
+
+    video.addEventListener('ended', openMember);
+    wrapper.onclick = playOpeningVideo;
+    wrapper.onkeydown = event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        playOpeningVideo();
+      }
+    };
+
+    pokeball.appendChild(video);
+
+    const label = document.createElement('div');
+    label.className = 'member-label';
+    label.textContent = member.name;
+
+    wrapper.appendChild(pokeball);
+    wrapper.appendChild(label);
+    container.appendChild(wrapper);
+  });
+});
 ```
 
-코드를 수정한 다음 아래 명령어로 업로드합니다.
+</details>
 
-```bash
-git add .
-git commit -m "feat: 변경 내용 설명"
-git fetch origin
-git rebase origin/main
-git push -u origin HEAD
+<details>
+<summary><strong>팀원 정보 — src/data.ts</strong></summary>
+
+```ts
+export interface Member {
+  id: number;
+  name: string;
+  pokemonName: string;
+  no: string;
+  desc: string;
+  types: string[];
+  height: string;
+  category: string;
+  genders: ('M' | 'F')[];
+  weight: string;
+  ability: string;
+  image: string;
+}
+
+export const members: Member[] = [
+  {
+    id: 1,
+    name: '고범규',
+    pokemonName: '규이리',
+    no: 'No. 0001',
+    desc: '태어났을 때부터 등에 이상한 씨앗이 심어져 있으며 몸과 함께 자란다고 한다. (더미 설명)',
+    types: ['grass', 'poison'],
+    height: '0.7m',
+    category: '씨앗포켓몬',
+    genders: ['M'],
+    weight: '6.9kg',
+    ability: '심록',
+    image: '/images/avatar1.png'
+  },
+  {
+    id: 2,
+    name: '한영민',
+    pokemonName: '민부기',
+    no: 'No. 0002',
+    desc: '꼬리의 불꽃은 기분을 나타낸다. 즐거우면 흔들리고 화가 나면 맹렬히 불타오른다. (더미 설명)',
+    types: ['fire'],
+    height: '0.6m',
+    category: '도롱뇽포켓몬',
+    genders: ['M'],
+    weight: '8.5kg',
+    ability: '맹화',
+    image: '/images/avatar2.png'
+  },
+  {
+    id: 3,
+    name: '최익준',
+    pokemonName: '익상해씨',
+    no: 'No. 0003',
+    desc: '위험해지면 등껍질에 숨어 몸을 보호한다. 입에서 물을 뿜어 공격한다. (더미 설명)',
+    types: ['water'],
+    height: '0.5m',
+    category: '꼬마거북포켓몬',
+    genders: ['M'],
+    weight: '9.0kg',
+    ability: '급류',
+    image: '/images/avatar3.png'
+  }
+];
 ```
 
-업로드가 끝나면 GitHub에서 `Compare & pull request`를 눌러 `main` 브랜치로 Pull Request를 만듭니다. 다른 팀원의 변경과 충돌하면 다음 명령어로 최신 `main`을 다시 반영합니다.
+</details>
 
-```bash
-git fetch origin
-git rebase origin/main
+<details>
+<summary><strong>포켓몬볼 영상과 반복 배경 — src/style.css</strong></summary>
+
+```css
+.pokeball-image {
+  width: 160px;
+  height: 160px;
+  position: relative;
+  background-image: url('/images/pokeball_closed.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+}
+
+.pokeball-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+
+.pokeball-wrapper.is-playing .pokeball-image {
+  background-image: none;
+}
+
+.pokeball-wrapper.is-playing .pokeball-video {
+  opacity: 1;
+}
+
+.pokedex-main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url('/images/pokeball_closed.png');
+  background-size: 130px auto;
+  background-repeat: repeat;
+  background-position: center;
+  opacity: 0.055;
+}
 ```
 
-충돌이 표시된 파일에서 `<<<<<<<`, `=======`, `>>>>>>>` 부분을 정리한 뒤 계속 진행합니다.
+</details>
 
-```bash
-git add .
-git rebase --continue
-git push --force-with-lease
-```
-
-`main`에 직접 올려야 하는 경우에는 반드시 먼저 최신 내용을 받아옵니다.
-
-```bash
-git switch main
-git pull --rebase origin main
-git add .
-git commit -m "feat: 변경 내용 설명"
-git push origin main
-```
+전체 코드는 [index.html](./index.html), [member.html](./member.html), [src/main.ts](./src/main.ts), [src/member.ts](./src/member.ts), [src/data.ts](./src/data.ts), [src/style.css](./src/style.css)에서 확인할 수 있습니다.
 
