@@ -20,7 +20,10 @@ export function setupApp(startWithDetail = false) {
       <section class="landing" id="landing" aria-labelledby="welcome-title">
         <div class="welcome">
           <div class="professor">
-            <div class="oak-frame"><img class="oak-image" src="${imagePath('oak.jpg')}" alt="연구소에서 반갑게 맞아주는 오박사" fetchpriority="high" /></div>
+            <div class="oak-frame">
+              <img class="oak-image professor-normal" src="${imagePath('professor.png')}" alt="연구소에서 반갑게 맞아주는 오박사" fetchpriority="high" />
+              <img class="oak-image professor-hover" src="${imagePath('professor real.png')}" alt="연구소에서 반갑게 맞아주는 오박사" fetchpriority="high" />
+            </div>
             <span class="professor-caption"><span class="status-dot"></span> 오박사 <span>포켓몬 연구가</span></span>
           </div>
           <div class="welcome-copy">
@@ -64,7 +67,7 @@ export function setupApp(startWithDetail = false) {
           </div>
           <article class="detail-info" aria-labelledby="member-name">
             <div class="detail-title detail-line"><span class="member-no" id="member-no"></span><h1 id="member-name" tabindex="-1"></h1><span class="member-english" id="member-english"></span></div>
-            <div class="detail-line"><span class="region-badge"><span aria-hidden="true">✓</span> 관동지방 · 첫 파트너 포켓몬</span><p class="member-desc" id="member-desc"></p><p class="member-desc dummy-desc" style="margin-top: 0.25rem; color: #888;">추가 설명을 위한 더미 텍스트 자리입니다.</p></div>
+            <div class="detail-line"><span class="region-badge"><span aria-hidden="true">✓</span> 관동지방 · 첫 파트너 포켓몬</span><p class="member-desc" id="member-desc"></p></div>
             <dl class="member-info-grid detail-line">
               <div class="info-item"><dt>타입</dt><dd class="types" id="member-types"></dd></div>
               <div class="info-item"><dt>키</dt><dd id="member-height"></dd></div>
@@ -72,10 +75,13 @@ export function setupApp(startWithDetail = false) {
               <div class="info-item"><dt>성별</dt><dd class="genders" id="member-genders"></dd></div>
               <div class="info-item"><dt>몸무게</dt><dd id="member-weight"></dd></div>
               <div class="info-item"><dt>특성</dt><dd><span id="member-ability"></span><button class="help-icon" id="ability-help" type="button" aria-expanded="false" aria-controls="ability-description" aria-label="특성 설명 보기">?</button></dd></div>
+              <div class="info-item"><dt>추가 정보 1</dt><dd>더미 데이터</dd></div>
+              <div class="info-item"><dt>추가 정보 2</dt><dd>더미 데이터</dd></div>
+              <div class="info-item"><dt>추가 정보 3</dt><dd>더미 데이터</dd></div>
             </dl>
             <p class="ability-description" id="ability-description" hidden></p>
 
-            <button class="action-button detail-line" id="choose-again" type="button">다른 파트너도 만나보기 <span aria-hidden="true">→</span></button>
+            <button class="action-button detail-line" id="choose-again" style="margin-top: 10px;" type="button">다른 파트너도 만나보기 <span aria-hidden="true">→</span></button>
           </article>
         </div>
         <nav class="detail-navigation" aria-label="다른 포켓몬 보기">
@@ -119,7 +125,7 @@ export function setupApp(startWithDetail = false) {
 
   // Decode before release so the first animation has no missing-image frame.
   for (const src of [OPEN_BALL_IMAGE, ...members.map(member => member.image)]) {
-    void preload(src).catch(() => {});
+    void preload(src).catch(() => { });
   }
 
   async function animate(element: Element, keyframes: Keyframe[], duration: number, delay = 0) {
@@ -131,7 +137,7 @@ export function setupApp(startWithDetail = false) {
     });
     animations.add(animation);
     // Back/forward and Escape can cancel a running transition.
-    await animation.finished.catch(() => {});
+    await animation.finished.catch(() => { });
   }
 
   function cancelAnimations() {

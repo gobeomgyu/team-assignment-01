@@ -35,6 +35,8 @@ img { display: block; max-width: 100%; }
 .professor { flex: 0 0 auto; transform: rotate(-2deg); }
 .oak-frame { position: relative; width: clamp(220px, 23vw, 298px); aspect-ratio: 424 / 314; overflow: hidden; outline: 7px solid white; box-shadow: 0 5px 22px #42463213; }
 .oak-image { position: absolute; width: 173.585%; max-width: none; left: -37.736%; top: -13.058%; }
+.professor-hover { opacity: 0; transition: opacity 0.2s ease-in-out; }
+.oak-frame:hover .professor-hover { opacity: 1; }
 .professor-caption { display: flex; justify-content: center; align-items: center; gap: 7px; font-size: 11px; font-weight: 700; margin-top: 17px; letter-spacing: -.3px; }
 .professor-caption > span:last-child { color: #93948a; font-weight: 400; margin-left: 3px; }
 .welcome-copy { padding-bottom: 16px; }
