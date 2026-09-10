@@ -227,7 +227,8 @@ body {
   background-color: white;
   border-radius: 20px;
   width: 100%;
-  max-width: 900px;
+  max-width: 940px;
+  padding: 20px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
   overflow: hidden;
   position: relative;
