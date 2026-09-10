@@ -1,20 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>팀 소개 랜딩 페이지</title>
-    <link rel="stylesheet" href="./src/style.css" />
+    <meta name="theme-color" content="#fdfcf9" />
+    <meta name="description" content="오박사의 연구소에서 파이리, 이상해씨, 꼬부기를 만나보세요. 포켓볼을 열면 나만의 파트너 도감이 펼쳐집니다." />
+    <title>오박사의 연구소 | 첫 번째 파트너</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="preload" as="image" href="/images/oak.jpg" />
+    <link rel="preload" as="image" href="/images/pokeball_closed.png" />
   </head>
   <body class="index-body">
     <div class="oak-section">
-      <img src="./images/oak.jpg" alt="오박사" class="oak-image" />
+      <img src="/images/oak.jpg" alt="오박사" class="oak-image" />
     </div>
     <div class="selection-section">
       <div class="pokeballs-container" id="pokeballs-container">
         <!-- JS로 몬스터볼 동적 렌더링 -->
       </div>
     </div>
-    <script type="module" src="./src/main.ts"></script>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
