@@ -64,7 +64,7 @@ export function setupApp(startWithDetail = false) {
           </div>
           <article class="detail-info" aria-labelledby="member-name">
             <div class="detail-title detail-line"><span class="member-no" id="member-no"></span><h1 id="member-name" tabindex="-1"></h1><span class="member-english" id="member-english"></span></div>
-            <div class="detail-line"><span class="region-badge"><span aria-hidden="true">✓</span> 관동지방 · 첫 파트너 포켓몬</span><p class="member-desc" id="member-desc"></p></div>
+            <div class="detail-line"><span class="region-badge"><span aria-hidden="true">✓</span> 관동지방 · 첫 파트너 포켓몬</span><p class="member-desc" id="member-desc"></p><p class="member-desc dummy-desc" style="margin-top: 0.25rem; color: #888;">추가 설명을 위한 더미 텍스트 자리입니다.</p></div>
             <dl class="member-info-grid detail-line">
               <div class="info-item"><dt>타입</dt><dd class="types" id="member-types"></dd></div>
               <div class="info-item"><dt>키</dt><dd id="member-height"></dd></div>
