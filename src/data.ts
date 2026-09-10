@@ -1,3 +1,5 @@
+import { imagePath } from './paths';
+
 export type PokemonType = 'fire' | 'grass' | 'poison' | 'water';
 
 export interface Member {
@@ -42,7 +44,7 @@ export const members: Member[] = [
     weight: '8.5kg',
     ability: '맹화',
     abilityDescription: 'HP가 줄어들면 불꽃타입 기술의 위력이 올라간다.',
-    image: '/images/charmander.png',
+    image: imagePath('charmander.png'),
     imageSize: [325, 336],
     color: '#e66a35',
     softColor: '#fff0e6',
@@ -62,7 +64,7 @@ export const members: Member[] = [
     weight: '6.9kg',
     ability: '심록',
     abilityDescription: 'HP가 줄어들면 풀타입 기술의 위력이 올라간다.',
-    image: '/images/bulbasaur.png',
+    image: imagePath('bulbasaur.png'),
     imageSize: [270, 264],
     color: '#43895c',
     softColor: '#edf5e9',
@@ -82,7 +84,7 @@ export const members: Member[] = [
     weight: '9.0kg',
     ability: '급류',
     abilityDescription: 'HP가 줄어들면 물타입 기술의 위력이 올라간다.',
-    image: '/images/squirtle.png',
+    image: imagePath('squirtle.png'),
     imageSize: [255, 272],
     color: '#3986ae',
     softColor: '#eaf4f9',

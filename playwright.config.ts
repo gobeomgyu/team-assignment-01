@@ -1,4 +1,7 @@
 import { defineConfig } from '@playwright/test';
+import viteConfig from './vite.config';
+
+const baseURL = new URL(viteConfig.base ?? '/', 'http://127.0.0.1:4173').href;
 
 export default defineConfig({
   testDir: './tests',
@@ -6,7 +9,7 @@ export default defineConfig({
   workers: 2,
   timeout: 30000,
   use: {
-    baseURL: 'http://127.0.0.1:4173',
+    baseURL,
     channel: 'chrome',
     headless: true,
     trace: 'retain-on-failure',
@@ -16,8 +19,8 @@ export default defineConfig({
     { name: 'mobile', use: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } },
   ],
   webServer: {
-    command: `${process.platform === 'win32' ? 'npm.cmd' : 'npm'} run dev -- --host 127.0.0.1 --port 4173 --strictPort`,
-    url: 'http://127.0.0.1:4173',
+    command: `${process.platform === 'win32' ? 'npm.cmd' : 'npm'} run preview -- --host 127.0.0.1 --port 4173 --strictPort`,
+    url: baseURL,
     reuseExistingServer: !process.env.CI,
   },
 });

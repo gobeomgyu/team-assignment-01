@@ -8,7 +8,7 @@ async function settled(page: Page, phase = 'detail') {
 test('the three balls reveal the requested Pokémon and can be opened again', async ({ page }, testInfo) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.locator('.choice-name')).toHaveText(['파이리', '이상해씨', '꼬부기']);
   await expect(page.locator('.oak-image')).toBeVisible();
   await expect(page.locator('#detail-view')).toBeHidden();
@@ -43,7 +43,7 @@ test('the three balls reveal the requested Pokémon and can be opened again', as
 
 test('the Pokémon travels left while the Pokédex enters from the right', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'Mobile uses the vertical layout.');
-  await page.goto('/');
+  await page.goto('./');
   await page.locator('.pokeball-choice').nth(2).click();
   await page.waitForFunction(() => {
     const flyer = document.querySelector('.pokemon-flyer');
@@ -64,7 +64,7 @@ test('the Pokémon travels left while the Pokédex enters from the right', async
 });
 
 test('rapid clicks do not double-open, and Escape cancels an unfinished release', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.locator('.pokeball-choice').first().click();
   await expect(page.locator('.pokeball-choice').nth(1)).toBeDisabled();
   await page.evaluate(() => document.querySelectorAll<HTMLButtonElement>('.pokeball-choice')[1].click());
@@ -82,8 +82,8 @@ test('rapid clicks do not double-open, and Escape cancels an unfinished release'
   await expect(page.locator('.pokemon-flyer')).toHaveCount(0);
 });
 
-test('previous, next, pagination, history and ability details work', async ({ page }) => {
-  await page.goto('/member.html?id=1');
+test('previous, next, pagination, history and ability details work', async ({ page, baseURL }) => {
+  await page.goto('member.html?id=1');
   await settled(page);
   await expect(page.locator('#member-name')).toHaveText('이상해씨');
   await page.locator('#ability-help').click();
@@ -110,14 +110,14 @@ test('previous, next, pagination, history and ability details work', async ({ pa
   await expect(page.locator('#member-name')).toHaveText('이상해씨');
   await page.locator('#back-button').click();
   await settled(page, 'selection');
-  await expect(page).toHaveURL('http://127.0.0.1:4173/');
+  await expect(page).toHaveURL(baseURL!);
   await page.goBack();
   await expect(page.locator('#member-name')).toHaveText('이상해씨');
 });
 
 test('keyboard activation and reduced motion retain the full functionality', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/');
+  await page.goto('./');
   await page.locator('.pokeball-choice').nth(2).focus();
   await page.keyboard.press('Enter');
   await settled(page);
@@ -132,7 +132,7 @@ test('keyboard activation and reduced motion retain the full functionality', asy
 
 test('missing artwork can be retried without locking the selection', async ({ page }) => {
   await page.route('**/images/charmander.png', route => route.abort());
-  await page.goto('/');
+  await page.goto('./');
   await page.locator('.pokeball-choice').first().click();
   await settled(page, 'selection');
   await expect(page.locator('#announcement')).toContainText('이미지를 불러오지 못했어요');
@@ -145,7 +145,7 @@ test('missing artwork can be retried without locking the selection', async ({ pa
 
 test('narrow screens and invalid deep links stay usable', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 740 });
-  await page.goto('/member.html?id=invalid');
+  await page.goto('member.html?id=invalid');
   await settled(page);
   await expect(page.locator('#member-name')).toHaveText('파이리');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -155,4 +155,35 @@ test('narrow screens and invalid deep links stay usable', async ({ page }) => {
   await page.locator('.pokeball-choice').nth(1).click();
   await settled(page);
   await expect(page.locator('#member-name')).toHaveText('이상해씨');
+});
+
+test('a default detail URL restores the same Pokémon after browser Back', async ({ page }) => {
+  for (const url of ['member.html', 'member.html?id=invalid']) {
+    await page.goto(url);
+    await settled(page);
+    await expect(page.locator('#member-name')).toHaveText('파이리');
+    await expect(page).toHaveURL(/member\.html\?id=2$/);
+    await page.locator('#next-btn').click();
+    await settled(page);
+    await expect(page.locator('#member-name')).toHaveText('이상해씨');
+    await page.goBack();
+    await settled(page);
+    await expect(page.locator('#member-name')).toHaveText('파이리');
+  }
+});
+
+test('resizing while the ball opens and the Pokémon flies leaves a usable detail', async ({ page }) => {
+  await page.goto('./');
+  await page.locator('.pokeball-choice').nth(2).click();
+  await expect(page.locator('#scene')).toHaveAttribute('data-phase', 'opening');
+  await page.setViewportSize({ width: 620, height: 760 });
+  await expect(page.locator('.pokemon-flyer')).toBeVisible();
+  await page.setViewportSize({ width: 1100, height: 800 });
+  await settled(page);
+  await expect(page.locator('#member-name')).toHaveText('꼬부기');
+  await expect(page.locator('.pokemon-flyer')).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.locator('#back-button').click();
+  await settled(page, 'selection');
+  await expect(page.locator('.pokeball-choice').nth(2)).toBeEnabled();
 });

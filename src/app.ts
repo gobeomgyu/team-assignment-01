@@ -1,6 +1,8 @@
 import { members, typeLabels, type Member } from './data';
+import { basePath, imagePath } from './paths';
 
 const HOME_TITLE = '오박사의 연구소 | 첫 번째 파트너';
+const OPEN_BALL_IMAGE = imagePath('pokeball_open.png');
 
 export function setupApp(startWithDetail = false) {
   const app = document.querySelector<HTMLDivElement>('#app');
@@ -8,7 +10,7 @@ export function setupApp(startWithDetail = false) {
 
   app.innerHTML = `
     <header class="site-header">
-      <a class="brand" href="/" aria-label="오박사의 연구소, 처음으로">
+      <a class="brand" href="${basePath}" aria-label="오박사의 연구소, 처음으로">
         <span class="pokeball-mark" aria-hidden="true"></span>
         <span>오박사의 연구소<span class="brand-subtitle">PROFESSOR OAK'S LAB</span></span>
       </a>
@@ -18,7 +20,7 @@ export function setupApp(startWithDetail = false) {
       <section class="landing" id="landing" aria-labelledby="welcome-title">
         <div class="welcome">
           <div class="professor">
-            <div class="oak-frame"><img class="oak-image" src="/images/oak.jpg" alt="연구소에서 반갑게 맞아주는 오박사" fetchpriority="high" /></div>
+            <div class="oak-frame"><img class="oak-image" src="${imagePath('oak.jpg')}" alt="연구소에서 반갑게 맞아주는 오박사" fetchpriority="high" /></div>
             <span class="professor-caption"><span class="status-dot"></span> 오박사 <span>포켓몬 연구가</span></span>
           </div>
           <div class="welcome-copy">
@@ -35,8 +37,8 @@ export function setupApp(startWithDetail = false) {
               <span class="choice-number">0${index + 1}<span>${member.no}</span></span>
               <span class="ball-stage">
                 <span class="ball-halo"></span>
-                <img class="ball-closed" src="/images/pokeball_closed.png" alt="닫힌 포켓볼" draggable="false" />
-                <img class="ball-open" src="/images/pokeball_open.png" alt="" aria-hidden="true" draggable="false" />
+                <img class="ball-closed" src="${imagePath('pokeball_closed.png')}" alt="닫힌 포켓볼" draggable="false" />
+                <img class="ball-open" src="${OPEN_BALL_IMAGE}" alt="" aria-hidden="true" draggable="false" />
                 <span class="ball-flash" aria-hidden="true"></span>
               </span>
               <span class="choice-copy"><span><span class="choice-name">${member.pokemonName}</span><span class="choice-english">${member.englishName}</span></span><span class="choice-arrow" aria-hidden="true">↗</span></span>
@@ -116,7 +118,7 @@ export function setupApp(startWithDetail = false) {
   }
 
   // Decode before release so the first animation has no missing-image frame.
-  for (const src of ['/images/pokeball_open.png', ...members.map(member => member.image)]) {
+  for (const src of [OPEN_BALL_IMAGE, ...members.map(member => member.image)]) {
     void preload(src).catch(() => {});
   }
 
@@ -151,7 +153,7 @@ export function setupApp(startWithDetail = false) {
     const url = new URL(window.location.href);
     if (member) url.searchParams.set('id', String(member.id));
     else {
-      url.pathname = '/';
+      url.pathname = basePath;
       url.searchParams.delete('id');
     }
     if (url.href !== window.location.href) window.history.pushState({}, '', url);
@@ -240,7 +242,7 @@ export function setupApp(startWithDetail = false) {
     scene.dataset.phase = 'opening';
     get('announcement').textContent = `${member.pokemonName}의 포켓볼을 열고 있어요.`;
     try {
-      await Promise.all([preload(member.image), preload('/images/pokeball_open.png')]);
+      await Promise.all([preload(member.image), preload(OPEN_BALL_IMAGE)]);
     } catch {
       if (run !== sequence) return;
       showSelection();
@@ -252,7 +254,6 @@ export function setupApp(startWithDetail = false) {
     const closed = button.querySelector<HTMLImageElement>('.ball-closed')!;
     const opened = button.querySelector<HTMLImageElement>('.ball-open')!;
     const flash = button.querySelector<HTMLElement>('.ball-flash')!;
-    const ballRect = closed.getBoundingClientRect();
     await animate(closed, [
       { transform: 'rotate(0deg)' }, { transform: 'rotate(-14deg)', offset: 0.2 },
       { transform: 'rotate(12deg)', offset: 0.4 }, { transform: 'rotate(-9deg)', offset: 0.6 },
@@ -277,6 +278,8 @@ export function setupApp(startWithDetail = false) {
       return;
     }
 
+    // Measure after opening, since the viewport may have changed during the shake.
+    const ballRect = button.querySelector<HTMLElement>('.ball-stage')!.getBoundingClientRect();
     const target = pokemonImage.getBoundingClientRect();
     const startX = ballRect.left + ballRect.width / 2 - target.left - target.width / 2;
     const startY = ballRect.top + ballRect.height / 2 - target.top - target.height / 2;
@@ -384,6 +387,11 @@ export function setupApp(startWithDetail = false) {
     const member = members.find(item => item.id === Number(id));
     if (member || (initial && startWithDetail)) {
       const selected = member ?? members[0];
+      if (!member) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('id', String(selected.id));
+        window.history.replaceState({}, '', url);
+      }
       lastChoice = choices[members.indexOf(selected)];
       renderMember(selected);
       finishDetail(selected, !initial);
