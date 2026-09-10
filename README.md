@@ -1,5 +1,7 @@
 # team-assignment-01
 
+## [👉 팀원 소개 페이지 바로가기](https://hanyoungmin13.github.io/tut01/)
+
 ## 고범규
 
 ### 자기소개
