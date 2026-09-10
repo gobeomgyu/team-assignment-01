@@ -74,7 +74,7 @@ export function setupApp(startWithDetail = false) {
               <div class="info-item"><dt>특성</dt><dd><span id="member-ability"></span><button class="help-icon" id="ability-help" type="button" aria-expanded="false" aria-controls="ability-description" aria-label="특성 설명 보기">?</button></dd></div>
             </dl>
             <p class="ability-description" id="ability-description" hidden></p>
-            <div class="trainer-line detail-line"><span class="trainer-avatar" aria-hidden="true">♙</span><span>함께할 트레이너<strong id="trainer-name"></strong></span><span class="trainer-tag">TEAM MEMBER</span></div>
+
             <button class="action-button detail-line" id="choose-again" type="button">다른 파트너도 만나보기 <span aria-hidden="true">→</span></button>
           </article>
         </div>
@@ -169,7 +169,7 @@ export function setupApp(startWithDetail = false) {
       'member-english': member.englishName, 'member-desc': member.desc,
       'member-height': member.height, 'member-category': member.category,
       'member-weight': member.weight, 'member-ability': member.ability,
-      'ability-description': member.abilityDescription, 'trainer-name': member.name,
+      'ability-description': member.abilityDescription,
       'art-number': member.no.replace('No. ', ''), 'art-caption': member.introduction,
     };
     Object.entries(values).forEach(([id, value]) => { get(id).textContent = value; });

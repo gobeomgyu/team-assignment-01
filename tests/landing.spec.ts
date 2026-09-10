@@ -26,7 +26,7 @@ test('the three balls reveal the requested Pokémon and can be opened again', as
     await settled(page);
     await expect(page.locator('#member-name')).toHaveText(name);
     await expect(page.locator('#member-no')).toHaveText(no);
-    await expect(page.locator('#trainer-name')).toHaveText(trainer);
+
     await expect(page.locator('#member-image')).toHaveAttribute('alt', name);
     expect(await page.locator('#member-image').evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
     await expect(page.locator('#member-name')).toBeFocused();
