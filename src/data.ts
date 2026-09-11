@@ -97,7 +97,7 @@ export const members: Member[] = [
     extraInfo2: '부족함',
     extraInfo3: '성실함',
     image: imagePath('squirtle.png'),
-    imageSize: [255, 272],
+    imageSize: [1288, 1222],
     color: '#3986ae',
     softColor: '#eaf4f9',
     introduction: '어디든 함께할 든든한 친구',
