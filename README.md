@@ -41,6 +41,13 @@ npm run test:e2e
 
 ## [👉 팀원 소개 페이지 바로가기](https://hanyoungmin13.github.io/tut01/)
 
+<<<<<<< HEAD
+=======
+
+## 팀원이 코드 가져와서 실행하기
+
+이 저장소에는 사이트를 실행하는 실제 소스 코드가 모두 포함되어 있습니다. Visual Studio Code 터미널에서 아래 명령어를 순서대로 실행하면 됩니다.
+>>>>>>> 2720dabd6f0b9c2641422082e5d4c4d9deb57dcb
 
 ```bash
 git clone https://github.com/gobeomgyu/team-assignment-01.git
