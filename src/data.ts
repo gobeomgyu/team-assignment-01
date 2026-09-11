@@ -44,7 +44,7 @@ export const members: Member[] = [
     weight: '74kg',
     ability: '오뚜기',
     abilityDescription: 'HP가 줄어들면 불꽃타입 기술의 위력이 올라간다.',
-    image: imagePath('charmander.png'),
+    image: imagePath('gyuiri.png'),
     imageSize: [325, 336],
     color: '#e66a35',
     softColor: '#fff0e6',
