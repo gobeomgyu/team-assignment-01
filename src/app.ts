@@ -12,7 +12,7 @@ export function setupApp(startWithDetail = false) {
     <header class="site-header">
       <a class="brand" href="${basePath}" aria-label="김박사의 연구소, 처음으로">
         <span class="pokeball-mark" aria-hidden="true"></span>
-        <span>김박사의 연구소<span class="brand-subtitle">PROFESSOR OAK'S LAB</span></span>
+        <span>김박사의 연구소<span class="brand-subtitle">PROFESSOR KIM'S LAB</span></span>
       </a>
       <div class="header-location"><span class="status-dot"></span> 태초마을 <span class="location-divider">/</span> KANTO REGION</div>
     </header>
