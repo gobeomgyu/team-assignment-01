@@ -1,7 +1,7 @@
 import { members, typeLabels, type Member } from './data';
 import { basePath, imagePath } from './paths';
 
-const HOME_TITLE = '오박사의 연구소 | 첫 번째 파트너';
+const HOME_TITLE = '김박사의 연구소 | 첫 번째 파트너';
 const OPEN_BALL_IMAGE = imagePath('pokeball_open.png');
 
 export function setupApp(startWithDetail = false) {
@@ -10,9 +10,9 @@ export function setupApp(startWithDetail = false) {
 
   app.innerHTML = `
     <header class="site-header">
-      <a class="brand" href="${basePath}" aria-label="오박사의 연구소, 처음으로">
+      <a class="brand" href="${basePath}" aria-label="김박사의 연구소, 처음으로">
         <span class="pokeball-mark" aria-hidden="true"></span>
-        <span>오박사의 연구소<span class="brand-subtitle">PROFESSOR OAK'S LAB</span></span>
+        <span>김박사의 연구소<span class="brand-subtitle">PROFESSOR OAK'S LAB</span></span>
       </a>
       <div class="header-location"><span class="status-dot"></span> 태초마을 <span class="location-divider">/</span> KANTO REGION</div>
     </header>
@@ -21,16 +21,16 @@ export function setupApp(startWithDetail = false) {
         <div class="welcome">
           <div class="professor">
             <div class="oak-frame">
-              <img class="oak-image professor-normal" src="${imagePath('professor.png')}" alt="연구소에서 반갑게 맞아주는 오박사" fetchpriority="high" />
-              <img class="oak-image professor-hover" src="${imagePath('professor real.png')}" alt="연구소에서 반갑게 맞아주는 오박사" fetchpriority="high" />
+              <img class="oak-image professor-normal" src="${imagePath('professor.png')}" alt="연구소에서 반갑게 맞아주는 김박사" fetchpriority="high" />
+              <img class="oak-image professor-hover" src="${imagePath('professor real.png')}" alt="연구소에서 반갑게 맞아주는 김박사" fetchpriority="high" />
             </div>
-            <span class="professor-caption"><span class="status-dot"></span> 오박사 <span>포켓몬 연구가</span></span>
+            <span class="professor-caption"><span class="status-dot"></span> 김박사 <span>포켓몬 연구가</span></span>
           </div>
           <div class="welcome-copy">
             <p class="eyebrow"><span></span> EVERY ADVENTURE STARTS WITH A FRIEND</p>
             <h1 id="welcome-title">너의 첫 번째 <em>파트너</em>를<br />만날 시간이란다!</h1>
             <p class="welcome-description">이곳에 세 마리의 포켓몬이 기다리고 있단다.<br />마음에 드는 포켓볼을 열어, 새로운 친구를 만나보렴.</p>
-            <span class="professor-signature">— 오박사</span>
+            <span class="professor-signature">— 김박사</span>
           </div>
         </div>
         <div class="selection-heading"><span>CHOOSE YOUR PARTNER</span><span>세 개의 포켓볼, 새로운 모험의 시작</span></div>
