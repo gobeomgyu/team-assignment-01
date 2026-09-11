@@ -75,9 +75,9 @@ export function setupApp(startWithDetail = false) {
               <div class="info-item"><dt>성별</dt><dd class="genders" id="member-genders"></dd></div>
               <div class="info-item"><dt>몸무게</dt><dd id="member-weight"></dd></div>
               <div class="info-item"><dt>특성</dt><dd><span id="member-ability"></span><button class="help-icon" id="ability-help" type="button" aria-expanded="false" aria-controls="ability-description" aria-label="특성 설명 보기">?</button></dd></div>
-              <div class="info-item"><dt>추가 정보 1</dt><dd>더미 데이터</dd></div>
-              <div class="info-item"><dt>추가 정보 2</dt><dd>더미 데이터</dd></div>
-              <div class="info-item"><dt>추가 정보 3</dt><dd>더미 데이터</dd></div>
+              <div class="info-item"><dt>추가 정보 1</dt><dd id="member-extra-info-1"></dd></div>
+              <div class="info-item"><dt>추가 정보 2</dt><dd id="member-extra-info-2"></dd></div>
+              <div class="info-item"><dt>추가 정보 3</dt><dd id="member-extra-info-3"></dd></div>
             </dl>
             <p class="ability-description" id="ability-description" hidden></p>
 
@@ -176,6 +176,9 @@ export function setupApp(startWithDetail = false) {
       'member-height': member.height, 'member-category': member.category,
       'member-weight': member.weight, 'member-ability': member.ability,
       'ability-description': member.abilityDescription,
+      'member-extra-info-1': member.extraInfo1,
+      'member-extra-info-2': member.extraInfo2,
+      'member-extra-info-3': member.extraInfo3,
       'art-number': member.no.replace('No. ', ''), 'art-caption': member.introduction,
     };
     Object.entries(values).forEach(([id, value]) => { get(id).textContent = value; });

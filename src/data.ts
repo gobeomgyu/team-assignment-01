@@ -16,6 +16,9 @@ export interface Member {
   weight: string;
   ability: string;
   abilityDescription: string;
+  extraInfo1: string;
+  extraInfo2: string;
+  extraInfo3: string;
   image: string;
   imageSize: [number, number];
   color: string;
@@ -44,6 +47,9 @@ export const members: Member[] = [
     weight: '74kg',
     ability: '오뚜기',
     abilityDescription: 'HP가 줄어들면 불꽃타입 기술의 위력이 올라간다.',
+    extraInfo1: '더미 데이터',
+    extraInfo2: '더미 데이터',
+    extraInfo3: '더미 데이터',
     image: imagePath('charmander.png'),
     imageSize: [325, 336],
     color: '#e66a35',
@@ -64,6 +70,9 @@ export const members: Member[] = [
     weight: '6.9kg',
     ability: '오타쿠',
     abilityDescription: 'HP가 줄어들면 풀타입 기술의 위력이 올라간다.',
+    extraInfo1: '더미 데이터',
+    extraInfo2: '더미 데이터',
+    extraInfo3: '더미 데이터',
     image: imagePath('bulbasaur.png'),
     imageSize: [270, 264],
     color: '#43895c',
@@ -78,12 +87,15 @@ export const members: Member[] = [
     no: 'No. 0007',
     desc: '위험해지면 등껍질에 숨어 몸을 보호한다. 입에서 물을 뿜어 공격한다.',
     types: ['water'],
-    height: '0.5m',
+    height: '171.99999999999cm',
     category: '꼬마거북포켓몬',
     genders: ['M'],
-    weight: '9.0kg',
+    weight: '69kg',
     ability: '부족한',
     abilityDescription: 'HP가 줄어들면 물타입 기술의 위력이 올라간다.',
+    extraInfo1: '열정적',
+    extraInfo2: '부족함',
+    extraInfo3: '성실함',
     image: imagePath('squirtle.png'),
     imageSize: [255, 272],
     color: '#3986ae',
