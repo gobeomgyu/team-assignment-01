@@ -1,37 +1,46 @@
 # team-assignment-01
 
+포켓몬 도감 컨셉의 GCS 9기 팀원 소개 랜딩 페이지입니다. 포켓볼을 클릭해 포켓몬 애니메이션과 함께 팀원 정보를 확인할 수 있으며, 모바일과 데스크톱 환경을 모두 지원하는 정적 웹사이트입니다.
+
+## 대상
+- **웹사이트**: [https://hanyoungmin13.github.io/tut01/](https://hanyoungmin13.github.io/tut01/)
+- **저장소**: [https://github.com/gobeomgyu/team-assignment-01](https://github.com/gobeomgyu/team-assignment-01)
+- **데이터 관리**: `src/data.ts` (포켓몬 정보 및 팀원 이름)
+
+## 최초 설정
+Visual Studio Code 터미널 등에서 저장소를 클론하고 패키지를 설치합니다. Git을 사용하지 않는 경우 GitHub의 **Code** 버튼을 눌러 **Download ZIP**으로 코드를 다운로드한 후 터미널에서 진행할 수 있습니다.
+
+```bash
+git clone https://github.com/gobeomgyu/team-assignment-01.git
+cd team-assignment-01
+npm install
+```
+*(Windows PowerShell에서 실행 정책 오류 시 `npm.cmd install` 사용)*
+
+## 로컬 실행
+```bash
+npm run dev
+```
+*(Windows PowerShell에서 실행 정책 오류 시 `npm.cmd run dev` 사용)*
+
+현재 Vite 기본 경로는 `/team-assignment-01/`이며, 터미널에 표시되는 로컬 주소를 `Ctrl`을 누른 채 클릭하여 접속하면 사이트를 확인할 수 있습니다. (`127.0.0.1` 주소는 실행한 컴퓨터에서만 열립니다.)
+
+## 관리
+포켓몬 정보 및 팀원 데이터는 `src/data.ts`에서 수정하고, 포켓몬 이동 및 도감 표시 등 애니메이션 동작은 `src/app.ts`에서 제어합니다. 이미지는 `public/images/`에 위치하며 `src/paths.ts`가 Vite 배포 경로에 맞게 연결합니다. 키보드(Enter, Space, Escape)로도 도감을 조작할 수 있으며 기기의 동작 줄이기 설정을 따릅니다.
+
+## 검증
+```bash
+npm run build
+npm run test:e2e
+```
+- `npm run build`: 페이지, Vite·Playwright 설정, 테스트의 TypeScript 검사 후 프로덕션 빌드를 수행합니다.
+- `npm run test:e2e`: 프로덕션 빌드 후 Chrome 환경에서 데스크톱 및 모바일 동작을 검증합니다.
+- 브라우저 테스트 캡처와 실패 추적 결과는 `test-results/` 폴더에 저장됩니다.
+
+---
+
 ## [👉 팀원 소개 페이지 바로가기](https://hanyoungmin13.github.io/tut01/)
 
-## 고범규
-
-### 자기소개
-
-안녕하세요! 저는 GCS 9기 고범규입니다!
-
-### 관심 분야
-
-* 운동
-* 음악감상
-* 영화
-* 게임
-* 프로그래밍
-* 스타트업
-
-### 프로젝트 경험
-
-1. 쏙식(Ssoksik) - AI 기반 당뇨 식단 관리 솔루션 앱 개발
-2. jg_estate - 중장년층 공인중개사를 위한 맞춤형 부동산 ERP 솔루션 개발
-3. beomgg. - Next.js 기반 개인 포트폴리오 및 기술 블로그 제작
-4. Android Memory Game - 코틀린 기반 안드로이드 네이티브 메모리 게임 앱 제작
-5. CheckProduct - 공공데이터를 활용한 식품 리콜 정보 조회 서비스 백엔드 시스템 구축
-
-### 내가 좋아하는 명언
-
-> "신발이 없음을 한탄하다가 거리에서 발이 없는 사람을 만났다."
-
-## 팀원이 코드 가져와서 실행하기
-
-이 저장소에는 사이트를 실행하는 실제 소스 코드가 모두 포함되어 있습니다. Visual Studio Code 터미널에서 아래 명령어를 순서대로 실행하면 됩니다.
 
 ```bash
 git clone https://github.com/gobeomgyu/team-assignment-01.git
