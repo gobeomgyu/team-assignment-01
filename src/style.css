@@ -105,7 +105,8 @@ img { display: block; max-width: 100%; }
 .pokemon-image { width: min(100%, calc(clamp(250px, 30vw, 390px) * var(--art-ratio))); height: auto; object-fit: contain; position: relative; mix-blend-mode: multiply; user-select: none; }
 /* Hide neighboring characters at the edges of the supplied crops, keeping the source files intact. */
 [data-pokemon="charmander"] { clip-path: polygon(0 0, 100% 0, 100% 50%, 92.8% 50%, 92.8% 72%, 100% 72%, 100% 100%, 0 100%); }
-[data-pokemon="squirtle"] { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 75%, 5% 75%, 9% 67%, 9% 34%, 0 34%); }
+[data-pokemon="squirtle"] { clip-path: none; }
+[data-pokemon="squirtle"] + .art-caption { display: none; }
 .pokemon-flyer { position: fixed; z-index: 20; object-fit: contain; pointer-events: none; max-width: none; mix-blend-mode: multiply; will-change: transform, opacity; }
 .art-caption { position: relative; display: flex; gap: 7px; align-items: center; font-size: 11px; color: #818c79; margin-top: 28px; }
 .art-caption .status-dot { background: var(--accent); }

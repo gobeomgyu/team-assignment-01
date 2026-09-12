@@ -1,5 +1,6 @@
 import { members, typeLabels, type Member } from './data';
 import { basePath, imagePath } from './paths';
+import { enableInterfaceSounds, playSound } from './sound';
 
 const HOME_TITLE = '김박사의 연구소 | 첫 번째 파트너';
 const OPEN_BALL_IMAGE = imagePath('pokeball_open.png');
@@ -75,9 +76,9 @@ export function setupApp(startWithDetail = false) {
               <div class="info-item"><dt>성별</dt><dd class="genders" id="member-genders"></dd></div>
               <div class="info-item"><dt>몸무게</dt><dd id="member-weight"></dd></div>
               <div class="info-item"><dt>특성</dt><dd><span id="member-ability"></span><button class="help-icon" id="ability-help" type="button" aria-expanded="false" aria-controls="ability-description" aria-label="특성 설명 보기">?</button></dd></div>
-              <div class="info-item"><dt>추가 정보 1</dt><dd>더미 데이터</dd></div>
-              <div class="info-item"><dt>추가 정보 2</dt><dd>더미 데이터</dd></div>
-              <div class="info-item"><dt>추가 정보 3</dt><dd>더미 데이터</dd></div>
+              <div class="info-item"><dt>추가 정보 1</dt><dd id="member-extra-info-1"></dd></div>
+              <div class="info-item"><dt>추가 정보 2</dt><dd id="member-extra-info-2"></dd></div>
+              <div class="info-item"><dt>추가 정보 3</dt><dd id="member-extra-info-3"></dd></div>
             </dl>
             <p class="ability-description" id="ability-description" hidden></p>
 
@@ -94,6 +95,8 @@ export function setupApp(startWithDetail = false) {
     <footer class="site-footer"><span>작은 만남에서 시작되는, 우리의 이야기.</span><span>GCS <span class="footer-cross">×</span> POKÉMON <span class="footer-year">2026</span></span></footer>
     <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
   `;
+
+  enableInterfaceSounds(app);
 
   const get = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const scene = get('scene');
@@ -176,6 +179,9 @@ export function setupApp(startWithDetail = false) {
       'member-height': member.height, 'member-category': member.category,
       'member-weight': member.weight, 'member-ability': member.ability,
       'ability-description': member.abilityDescription,
+      'member-extra-info-1': member.extraInfo1,
+      'member-extra-info-2': member.extraInfo2,
+      'member-extra-info-3': member.extraInfo3,
       'art-number': member.no.replace('No. ', ''), 'art-caption': member.introduction,
     };
     Object.entries(values).forEach(([id, value]) => { get(id).textContent = value; });
@@ -266,12 +272,14 @@ export function setupApp(startWithDetail = false) {
       { transform: 'rotate(7deg)', offset: 0.8 }, { transform: 'rotate(0deg)' },
     ], 420);
     if (run !== sequence) return;
+    playSound('ballOpen');
     await Promise.all([
       animate(closed, [{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'translateY(-14px) scale(0.78)' }], 240),
       animate(opened, [{ opacity: 0, transform: 'translateY(12px) scale(0.8)' }, { opacity: 1, transform: 'translateY(-12px) scale(1.12)' }], 360),
       animate(flash, [{ opacity: 0, transform: 'scale(0.15)' }, { opacity: 0.85, offset: 0.4 }, { opacity: 0, transform: 'scale(2.8)' }], 640, 120),
     ]);
     if (run !== sequence) return;
+    playSound('appear');
     renderMember(member);
     detail.classList.add('is-staged');
     detail.hidden = false;
@@ -344,6 +352,7 @@ export function setupApp(startWithDetail = false) {
     ]);
     if (run !== sequence) return;
     renderMember(member);
+    playSound('appear');
     setBusy(true);
     await Promise.all([
       animate(pokemonImage, [{ opacity: 0, transform: 'translateX(60px) scale(0.9)' }, { opacity: 1, transform: 'translateX(0) scale(1)' }], 600),

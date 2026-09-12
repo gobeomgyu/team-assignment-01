@@ -41,8 +41,7 @@ npm run test:e2e
 
 ## [👉 팀원 소개 페이지 바로가기](https://hanyoungmin13.github.io/tut01/)
 
-<<<<<<< HEAD
-=======
+
 
 ## 팀원이 코드 가져와서 실행하기
 
