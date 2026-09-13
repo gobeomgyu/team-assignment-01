@@ -75,12 +75,11 @@ export function setupApp(startWithDetail = false) {
               <div class="info-item"><dt>분류</dt><dd id="member-category"></dd></div>
               <div class="info-item"><dt>성별</dt><dd class="genders" id="member-genders"></dd></div>
               <div class="info-item"><dt>몸무게</dt><dd id="member-weight"></dd></div>
-              <div class="info-item"><dt>특성</dt><dd><span id="member-ability"></span><button class="help-icon" id="ability-help" type="button" aria-expanded="false" aria-controls="ability-description" aria-label="특성 설명 보기">?</button></dd></div>
+              <div class="info-item"><dt>특성</dt><dd><span id="member-ability"></span><span class="ability-help-wrapper"><button class="help-icon" id="ability-help" type="button" aria-describedby="ability-description" aria-label="특성 설명 보기">?</button><div class="ability-description" id="ability-description" role="tooltip"></div></span></dd></div>
               <div class="info-item"><dt>추가 정보 1</dt><dd id="member-extra-info-1"></dd></div>
               <div class="info-item"><dt>추가 정보 2</dt><dd id="member-extra-info-2"></dd></div>
               <div class="info-item"><dt>추가 정보 3</dt><dd id="member-extra-info-3"></dd></div>
             </dl>
-            <p class="ability-description" id="ability-description" hidden></p>
 
             <button class="action-button detail-line" id="choose-again" style="margin-top: 10px;" type="button">다른 파트너도 만나보기 <span aria-hidden="true">→</span></button>
           </article>
@@ -193,8 +192,6 @@ export function setupApp(startWithDetail = false) {
     pokemonImage.alt = member.pokemonName;
     get('member-types').innerHTML = member.types.map(type => `<span class="type-badge type-${type}">${typeLabels[type]}</span>`).join('');
     get('member-genders').innerHTML = member.genders.map(gender => `<span class="gender-${gender.toLowerCase()}" aria-label="${gender === 'M' ? '수컷' : '암컷'}">${gender === 'M' ? '♂' : '♀'}</span>`).join('');
-    get('ability-description').hidden = true;
-    get('ability-help').setAttribute('aria-expanded', 'false');
     const index = members.indexOf(member);
     const previous = members[(index + members.length - 1) % members.length];
     const next = members[(index + 1) % members.length];
@@ -386,11 +383,6 @@ export function setupApp(startWithDetail = false) {
     const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-id]');
     const member = members.find(item => item.id === Number(button?.dataset.id));
     if (member) void switchMember(member);
-  });
-  get('ability-help').addEventListener('click', () => {
-    const description = get('ability-description');
-    description.hidden = !description.hidden;
-    get('ability-help').setAttribute('aria-expanded', String(!description.hidden));
   });
   window.addEventListener('keydown', event => {
     if (event.key === 'Escape' && (current || busy)) showSelection();
