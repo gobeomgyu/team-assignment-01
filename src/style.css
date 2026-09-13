@@ -117,11 +117,12 @@ img { display: block; max-width: 100%; }
 .region-badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 23px; background: var(--accent-soft); color: var(--accent); border-radius: 30px; font-size: 11px; font-weight: 600; padding: 8px 12px; }
 .region-badge > span { display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; color: white; background: var(--accent); font-size: 10px; }
 .member-desc { margin-top: 16px; font-size: 14px; line-height: 1.9; color: #59614f; word-break: keep-all; min-height: 54px; letter-spacing: -.3px; }
-.member-info-grid { display: grid; grid-template-columns: 1fr .8fr 1.2fr; border: 1px solid #e3e6df; border-radius: 5px; margin-top: 23px; padding: 0 23px; }
+.member-info-grid { display: grid; grid-template-columns: .85fr 1.15fr 1fr; border: 1px solid #e3e6df; border-radius: 5px; margin-top: 23px; padding: 0 23px; }
 .info-item { padding: 17px 4px; min-width: 0; }
 .info-item:nth-child(n + 4) { border-top: 1px solid #eceee7; }
 .info-item dt { font-size: 11px; color: #9a9f93; margin-bottom: 9px; }
 .info-item dd { display: flex; gap: 8px; align-items: center; min-height: 25px; font-size: 13px; color: #343c2d; }
+#member-height { white-space: nowrap; font-variant-numeric: tabular-nums; letter-spacing: -.35px; }
 .type-badge { display: inline-grid; place-items: center; padding: 3px 8px; min-width: 28px; border-radius: 3px; color: white; font-size: 10px; font-weight: 600; white-space: nowrap; }
 .type-fire { background: #e98449; }
 .type-grass { background: #69a957; }

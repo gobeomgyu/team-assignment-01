@@ -87,7 +87,7 @@ export const members: Member[] = [
     no: 'No. 0007',
     desc: '위험해지면 등껍질에 숨어 몸을 보호한다. 입에서 물을 뿜어 공격한다.',
     types: ['water'],
-    height: '171.99999999999cm',
+    height: '171.999999999cm',
     category: '꼬마거북포켓몬',
     genders: ['M'],
     weight: '69kg',
