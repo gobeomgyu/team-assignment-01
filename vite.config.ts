@@ -7,6 +7,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
+        pokedex: fileURLToPath(new URL('./pokedex.html', import.meta.url)),
+        store: fileURLToPath(new URL('./store.html', import.meta.url)),
         member: fileURLToPath(new URL('./member.html', import.meta.url))
       }
     }

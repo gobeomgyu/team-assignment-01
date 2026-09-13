@@ -1,8 +1,9 @@
 import { members, typeLabels, type Member } from './data';
 import { basePath, imagePath } from './paths';
 import { enableInterfaceSounds, playSound } from './sound';
+import { renderSectionNavigation } from './navigation';
 
-const HOME_TITLE = '김박사의 연구소 | 첫 번째 파트너';
+const POKEDEX_TITLE = '포켓몬 도감 | 김박사의 연구소';
 const OPEN_BALL_IMAGE = imagePath('pokeball_open.png');
 
 export function setupApp(startWithDetail = false) {
@@ -17,6 +18,7 @@ export function setupApp(startWithDetail = false) {
       </a>
       <div class="header-location"><span class="status-dot"></span> 태초마을 <span class="location-divider">/</span> KANTO REGION</div>
     </header>
+    ${renderSectionNavigation('pokedex')}
     <main class="scene" id="scene" data-phase="selection">
       <section class="landing" id="landing" aria-labelledby="welcome-title">
         <div class="welcome">
@@ -75,7 +77,7 @@ export function setupApp(startWithDetail = false) {
               <div class="info-item"><dt>분류</dt><dd id="member-category"></dd></div>
               <div class="info-item"><dt>성별</dt><dd class="genders" id="member-genders"></dd></div>
               <div class="info-item"><dt>몸무게</dt><dd id="member-weight"></dd></div>
-              <div class="info-item"><dt>특성</dt><dd><span id="member-ability"></span><span class="ability-help-wrapper"><button class="help-icon" id="ability-help" type="button" aria-describedby="ability-description" aria-label="특성 설명 보기">?</button><div class="ability-description" id="ability-description" role="tooltip"></div></span></dd></div>
+              <div class="info-item"><dt>특성</dt><dd><span id="member-ability"></span><span class="ability-help-wrapper"><button class="help-icon" id="ability-help" type="button" aria-describedby="ability-description" aria-expanded="false" aria-label="특성 설명 보기">?</button><div class="ability-description" id="ability-description" role="tooltip"></div></span></dd></div>
               <div class="info-item"><dt>추가 정보 1</dt><dd id="member-extra-info-1"></dd></div>
               <div class="info-item"><dt>추가 정보 2</dt><dd id="member-extra-info-2"></dd></div>
               <div class="info-item"><dt>추가 정보 3</dt><dd id="member-extra-info-3"></dd></div>
@@ -102,6 +104,8 @@ export function setupApp(startWithDetail = false) {
   const landing = get('landing');
   const detail = get('detail-view');
   const pokemonImage = get<HTMLImageElement>('member-image');
+  const abilityHelp = get<HTMLButtonElement>('ability-help');
+  const abilityWrapper = abilityHelp.parentElement!;
   const choices = [...document.querySelectorAll<HTMLButtonElement>('.pokeball-choice')];
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const animations = new Set<Animation>();
@@ -111,6 +115,32 @@ export function setupApp(startWithDetail = false) {
   let sequence = 0;
   let lastChoice = choices[0];
   let flyer: HTMLImageElement | undefined;
+  let abilityPinned = false;
+
+  function showAbilityDescription(visible: boolean) {
+    abilityHelp.setAttribute('aria-expanded', String(visible));
+  }
+
+  function resetAbilityDescription() {
+    abilityPinned = false;
+    showAbilityDescription(false);
+  }
+
+  abilityWrapper.addEventListener('pointerenter', event => {
+    if (event.pointerType === 'mouse') showAbilityDescription(true);
+  });
+  abilityWrapper.addEventListener('pointerleave', () => {
+    if (!abilityPinned) showAbilityDescription(false);
+  });
+  abilityHelp.addEventListener('focus', () => showAbilityDescription(true));
+  abilityHelp.addEventListener('blur', resetAbilityDescription);
+  abilityHelp.addEventListener('click', () => {
+    abilityPinned = !abilityPinned;
+    showAbilityDescription(abilityPinned);
+  });
+  document.addEventListener('pointerdown', event => {
+    if (!abilityWrapper.contains(event.target as Node)) resetAbilityDescription();
+  });
 
   function preload(src: string): Promise<void> {
     const cached = imageCache.get(src);
@@ -161,13 +191,14 @@ export function setupApp(startWithDetail = false) {
     const url = new URL(window.location.href);
     if (member) url.searchParams.set('id', String(member.id));
     else {
-      url.pathname = basePath;
+      url.pathname = `${basePath}pokedex.html`;
       url.searchParams.delete('id');
     }
     if (url.href !== window.location.href) window.history.pushState({}, '', url);
   }
 
   function renderMember(member: Member) {
+    resetAbilityDescription();
     current = member;
     scene.style.setProperty('--accent', member.color);
     scene.style.setProperty('--accent-soft', member.softColor);
@@ -205,6 +236,7 @@ export function setupApp(startWithDetail = false) {
 
   function showSelection(focus = true, pushHistory = true) {
     cancelAnimations();
+    resetAbilityDescription();
     current = undefined;
     detail.hidden = true;
     detail.inert = true;
@@ -215,7 +247,7 @@ export function setupApp(startWithDetail = false) {
     scene.dataset.phase = 'selection';
     scene.style.removeProperty('--accent');
     scene.style.removeProperty('--accent-soft');
-    document.title = HOME_TITLE;
+    document.title = POKEDEX_TITLE;
     setBusy(false);
     if (pushHistory) updateUrl();
     if (focus) lastChoice.focus({ preventScroll: true });
@@ -368,11 +400,6 @@ export function setupApp(startWithDetail = false) {
   });
   get('back-button').addEventListener('click', () => showSelection());
   get('choose-again').addEventListener('click', () => showSelection());
-  document.querySelector<HTMLAnchorElement>('.brand')!.addEventListener('click', event => {
-    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
-    showSelection(false);
-  });
   get('prev-btn').addEventListener('click', () => {
     if (current) void switchMember(members[(members.indexOf(current) + members.length - 1) % members.length]);
   });
@@ -385,6 +412,10 @@ export function setupApp(startWithDetail = false) {
     if (member) void switchMember(member);
   });
   window.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && abilityHelp.getAttribute('aria-expanded') === 'true') {
+      resetAbilityDescription();
+      return;
+    }
     if (event.key === 'Escape' && (current || busy)) showSelection();
   });
 

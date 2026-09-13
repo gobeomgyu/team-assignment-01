@@ -156,10 +156,10 @@ export function enableInterfaceSounds(root: Document | HTMLElement = document) {
 
   root.addEventListener('click', event => {
     if (!(event.target instanceof Element)) return;
-    const control = event.target.closest<HTMLButtonElement | HTMLAnchorElement>('button, a.brand');
+    const control = event.target.closest<HTMLButtonElement | HTMLAnchorElement>('button, a.brand, a.pokedex-link, a.section-nav-link');
     if (!control || ('disabled' in control && control.disabled)) return;
 
-    if (control.matches('.nav-button, .dex-dot, .back-button, .action-button, a.brand')) playSound('navigate');
+    if (control.matches('.nav-button, .dex-dot, .back-button, .action-button, a.brand, a.pokedex-link, a.section-nav-link')) playSound('navigate');
     else if (!control.classList.contains('pokeball-choice')) playSound('click');
   });
 }

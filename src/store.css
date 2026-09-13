@@ -1,0 +1,91 @@
+.store-page { max-width: 1170px; margin-inline: auto; padding: 65px 42px 60px; }
+.store-intro { display: flex; align-items: center; justify-content: space-between; gap: 35px; padding-bottom: 50px; }
+.store-intro .eyebrow { color: #aa7162; letter-spacing: 1.8px; margin-bottom: 16px; }
+.store-intro .eyebrow > span { background: #bb8b7e; }
+.store-intro h1 { font-size: clamp(30px, 3.1vw, 43px); line-height: 1.45; letter-spacing: -2px; font-weight: 800; word-break: keep-all; }
+.store-intro h1 em { font-style: normal; color: #cf5143; }
+.store-description { font-size: 13px; line-height: 1.9; color: #808272; margin-top: 19px; word-break: keep-all; }
+.store-stamp { flex: 0 0 auto; display: flex; gap: 11px; align-items: center; padding: 17px 19px; border: 1px solid #d9ac9e; outline: 1px solid #e6cfc4; outline-offset: 4px; color: #b67d6b; transform: rotate(6deg); font-size: 10px; letter-spacing: 1.4px; }
+.store-stamp .pokeball-mark { opacity: .6; }
+.store-stamp small { display: block; font-size: 7px; letter-spacing: 1.1px; margin-top: 6px; }
+.store-collection-heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-bottom: 17px; border-bottom: 1px solid #e2e1d8; margin-bottom: 40px; }
+.store-collection-heading h2 { display: flex; gap: 9px; align-items: center; margin: 0; font-size: 14px; font-weight: 700; letter-spacing: -.4px; }
+.store-collection-heading h2 > span { display: grid; place-items: center; min-width: 24px; height: 20px; border-radius: 10px; background: #f3e8e1; color: #ba7462; font-size: 10px; font-variant-numeric: tabular-nums; }
+.store-collection-heading > p { color: #97998b; font-size: 11px; }
+.product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 32px; row-gap: 42px; list-style: none; margin: 0; padding: 0 5px; }
+.product-grid > li { min-width: 0; padding-top: 10px; }
+.product-card { position: relative; height: 100%; padding: 13px 13px 0; border: 1px solid #ebe8e0; background: #fff; box-shadow: 0 3px 5px #3b39270a, 0 12px 22px #3b392708; transform: rotate(-1deg); transition: transform 240ms, box-shadow 240ms; }
+.product-grid > li:nth-child(3n + 2) .product-card { transform: rotate(1.1deg); }
+.product-grid > li:nth-child(3n) .product-card { transform: rotate(-.5deg); }
+.photo-tape { position: absolute; z-index: 2; width: 76px; height: 25px; top: -12px; left: 50%; transform: translateX(-50%) rotate(-4deg); background: #e5d5b8b8; border-inline: 1px dashed #d6c5a4a6; }
+.product-grid > li:nth-child(3n + 2) .photo-tape { transform: translateX(-50%) rotate(5deg); background: #d6dfcec4; }
+.product-grid > li:nth-child(3n) .photo-tape { background: #d7e1e6c4; }
+.product-scene { position: relative; display: grid; place-items: center; overflow: hidden; aspect-ratio: 1; background-color: var(--product-background); background-image: radial-gradient(ellipse at 12% 5%, #ffffff80, transparent 60%), linear-gradient(145deg, transparent 60%, #3636280c); }
+.product-scene::after { content: ''; position: absolute; left: 18%; right: 18%; bottom: 10%; height: 14%; border-radius: 50%; background: #36362812; filter: blur(10px); }
+.product-scene-number { position: absolute; top: 15px; left: 15px; color: var(--product-accent); opacity: .7; font-size: 8px; letter-spacing: 1px; }
+.product-object { position: relative; z-index: 1; display: flex; align-items: center; flex-direction: column; width: 61%; padding: 10px 9px 12px; background: #fffefc; border: 1px solid #3535290a; border-radius: 6px; box-shadow: 5px 10px 12px #3e3b2820; transform: rotate(-7deg); }
+.product-image { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; mix-blend-mode: multiply; }
+.product-print-label { color: #90917f; font-size: 5px; letter-spacing: .6px; margin-bottom: 7px; white-space: nowrap; }
+.product-print-name { font-size: 11px; font-weight: 700; letter-spacing: -.4px; color: var(--product-accent); margin-top: 5px; }
+.product-print-name small { display: block; font-family: Georgia, serif; font-size: 7px; font-style: italic; font-weight: 400; letter-spacing: .3px; color: #a4a392; text-align: center; margin-top: 4px; }
+.product-scene--sticker .product-object { width: 67%; aspect-ratio: 1; border-radius: 50%; padding: 9px; justify-content: center; transform: rotate(7deg); box-shadow: 3px 5px 4px #3e3b281a; }
+.product-scene--sticker .product-object::after { content: ''; position: absolute; inset: 4px; border: 1px dashed #d6d7c7; border-radius: 50%; }
+.product-scene--sticker .product-image { width: 88%; border-radius: 50%; }
+.product-scene--sticker .product-print-label, .product-scene--sticker .product-print-name { display: none; }
+.product-scene--poster .product-object { width: 63%; border-radius: 0; padding: 14px 10px 10px; transform: rotate(6deg); box-shadow: 5px 8px 10px #3e3b2820; }
+.product-scene--poster .product-print-label { width: 100%; padding-bottom: 7px; border-bottom: 1px solid #e7e9de; text-align: center; }
+.product-scene--poster .product-print-name { align-self: stretch; border-top: 1px solid #e7e9de; margin-top: 6px; padding-top: 8px; text-align: center; }
+.product-caption { padding: 19px 9px 17px; }
+.product-category { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 8px; letter-spacing: 1.3px; font-weight: 600; color: var(--product-accent); }
+.product-availability { font-size: 9px; font-weight: 400; letter-spacing: 0; color: #90917f; white-space: nowrap; }
+.product-caption h3 { margin: 8px 0 7px; font-size: 17px; font-weight: 700; letter-spacing: -.6px; }
+.product-description { font-size: 10px; line-height: 1.7; color: #989889; word-break: keep-all; }
+.photo-signature { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 21px; color: #b4afa0; font: italic 11px Georgia, serif; letter-spacing: .2px; }
+.photo-signature > span { color: #c89986; font: 17px Georgia, serif; }
+.store-closing { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 57px; color: #989b8d; font-size: 11px; text-align: center; line-height: 1.7; }
+.store-closing .tiny-ball { flex-shrink: 0; }
+@media (hover: hover) {
+  .product-grid > li:hover .product-card { transform: translateY(-7px) rotate(0deg); box-shadow: 0 6px 8px #3b39270a, 0 16px 26px #3b392710; }
+}
+@media (max-width: 850px) {
+  .store-page { padding: 44px 30px 45px; }
+  .store-stamp { display: none; }
+  .store-intro { padding-bottom: 36px; }
+  .product-grid { column-gap: 22px; row-gap: 32px; }
+  .product-card { padding: 10px 10px 0; }
+  .product-caption { padding-inline: 3px; }
+  .product-caption h3 { font-size: 15px; }
+  .product-print-label { font-size: 4px; letter-spacing: .1px; }
+  .product-print-name { font-size: 9px; }
+  .product-print-name small { font-size: 6px; }
+}
+@media (max-width: 700px) {
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .store-page { padding: 35px 21px 35px; }
+  .store-intro .eyebrow { justify-content: flex-start; font-size: 7px; letter-spacing: 1.1px; margin-bottom: 12px; }
+  .store-intro h1 { font-size: 29px; letter-spacing: -1.4px; }
+  .store-intro h1 em { display: block; }
+  .store-description { font-size: 11px; margin-top: 15px; }
+  .store-collection-heading { gap: 10px; margin-bottom: 28px; padding-bottom: 14px; }
+  .store-collection-heading h2 { font-size: 12px; gap: 6px; }
+  .store-collection-heading > p { font-size: 9px; max-width: 125px; text-align: right; line-height: 1.7; }
+  .product-grid { column-gap: 16px; row-gap: 26px; padding: 0; }
+  .product-card { padding: 7px 7px 0; }
+  .photo-tape { width: 48px; height: 18px; top: -8px; }
+  .product-scene-number { top: 9px; left: 9px; font-size: 6px; letter-spacing: .5px; }
+  .product-object { width: 66%; padding: 7px 5px; border-radius: 4px; }
+  .product-print-label { display: none; }
+  .product-print-name { font-size: 7px; margin-top: 4px; }
+  .product-print-name small { font-size: 4px; letter-spacing: 0; margin-top: 2px; }
+  .product-scene--poster .product-object { padding: 10px 5px 7px; }
+  .product-caption { padding: 13px 3px 12px; }
+  .product-category { font-size: 6px; letter-spacing: .5px; gap: 3px; }
+  .product-availability { font-size: 8px; }
+  .product-caption h3 { font-size: 13px; margin-top: 8px; letter-spacing: -.7px; line-height: 1.5; }
+  .product-description { font-size: 9px; }
+  .photo-signature { margin-top: 15px; font-size: 8px; letter-spacing: 0; }
+  .photo-signature > span { font-size: 13px; }
+  .store-closing { margin-top: 38px; font-size: 9px; }
+}

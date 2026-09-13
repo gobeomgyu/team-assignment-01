@@ -30,6 +30,17 @@ export const typeLabels: Record<PokemonType, string> = {
   fire: '불꽃', grass: '풀', poison: '독', water: '물',
 };
 
+// Temporary home copy. Replace these strings when the team introduction is ready.
+export const homeIntroduction = {
+  eyebrow: 'WELCOME TO OUR LITTLE WORLD',
+  title: '서로 다른 우리가 만나,',
+  highlight: '하나의 모험이 되다.',
+  paragraphs: [
+    '안녕하세요! 각자의 개성과 이야기를 가진 세 사람이 모였습니다.',
+    '좋아하는 것도, 잘하는 것도 조금씩 다르지만 새로운 도전을 향한 마음은 같아요. 함께 배우고 성장하는 우리들의 이야기를 만나보세요.',
+  ],
+};
+
 // Selection order: Charmander → Bulbasaur → Squirtle.
 // Preserve existing member IDs for member.html links.
 export const members: Member[] = [
@@ -64,17 +75,17 @@ export const members: Member[] = [
     no: 'No. 0001',
     desc: '태어났을 때부터 등에 이상한 씨앗이 심어져 있으며 몸과 함께 자란다고 한다.',
     types: ['grass', 'poison'],
-    height: '0.7m',
-    category: '씨앗포켓몬',
+    height: '170cm',
+    category: 'INFJ',
     genders: ['M'],
-    weight: '6.9kg',
+    weight: '95kg',
     ability: '오타쿠',
-    abilityDescription: 'HP가 줄어들면 풀타입 기술의 위력이 올라간다.',
-    extraInfo1: '더미 데이터',
-    extraInfo2: '더미 데이터',
-    extraInfo3: '더미 데이터',
-    image: imagePath('bulbasaur.png'),
-    imageSize: [270, 264],
+    abilityDescription: '자신만의 세계에 빠져있다',
+    extraInfo1: '이탈리아 베네치아에 갔다온 적이 있다.',
+    extraInfo2: '지금까지 모은 프라모델의 개수가 30개를 넘는다.',
+    extraInfo3: '지금까지 가본 나라가 6개국을 넘는다.',
+    image: imagePath('iksanghaessi.png'),
+    imageSize: [1254, 1254],
     color: '#43895c',
     softColor: '#edf5e9',
     introduction: '함께 자라는 우리들의 모험',

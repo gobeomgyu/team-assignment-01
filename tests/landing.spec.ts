@@ -5,10 +5,74 @@ async function settled(page: Page, phase = 'detail') {
   await expect(page.locator('#scene')).toHaveAttribute('aria-busy', 'false');
 }
 
-test('the three balls reveal the requested Pokémon and can be opened again', async ({ page }, testInfo) => {
+test('home introduces the team, scrolls to silhouettes and leads to the Pokédex', async ({ page }, testInfo) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('./');
+  await expect(page.locator('#intro-title')).toBeInViewport();
+  await expect(page.locator('.intro-description')).toBeVisible();
+  await expect(page.locator('.pokedex-link')).not.toBeInViewport();
+  await expect(page.locator('.partner-silhouette')).toHaveCount(3);
+  await page.screenshot({ path: testInfo.outputPath('home.png'), fullPage: true, animations: 'disabled' });
+
+  await page.locator('.scroll-cue').click();
+  await expect(page.locator('.partner-silhouette').first()).toBeInViewport();
+  await expect(page.locator('.pokedex-link')).toBeInViewport();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole('link', { name: '포켓몬 도감으로 이동하기' }).click();
+  await settled(page, 'selection');
+  await expect(page).toHaveURL(/\/pokedex\.html$/);
+  await page.locator('.pokeball-choice').nth(1).click();
+  await settled(page);
+  await expect(page.locator('#member-name')).toHaveText('익상해씨');
+  await page.locator('.brand').click();
+  await expect(page.locator('#intro-title')).toBeInViewport();
+  expect(errors).toEqual([]);
+});
+
+test('the updated partner artwork, facts and ability tooltip work on each screen size', async ({ page }, testInfo) => {
+  await page.goto('member.html?id=1');
+  await settled(page);
+  await expect(page.locator('#member-image')).toHaveAttribute('src', /\/images\/iksanghaessi\.png$/);
+  await expect.poll(() => page.locator('#member-image').evaluate((img: HTMLImageElement) => img.naturalWidth)).toBe(1254);
+  await expect(page.locator('#member-height')).toHaveText('170cm');
+  await expect(page.locator('#member-category')).toHaveText('INFJ');
+  await expect(page.locator('#member-weight')).toHaveText('95kg');
+  await expect(page.locator('#member-ability')).toHaveText('오타쿠');
+  await expect(page.locator('#member-extra-info-1')).toHaveText('이탈리아 베네치아에 갔다온 적이 있다.');
+  await expect(page.locator('#member-extra-info-2')).toHaveText('지금까지 모은 프라모델의 개수가 30개를 넘는다.');
+  await expect(page.locator('#member-extra-info-3')).toHaveText('지금까지 가본 나라가 6개국을 넘는다.');
+  if (testInfo.project.name === 'desktop') await page.locator('#ability-help').hover();
+  else await page.locator('#ability-help').tap();
+  await expect(page.getByRole('tooltip')).toBeVisible();
+  await expect(page.getByRole('tooltip')).toHaveText('자신만의 세계에 빠져있다');
+  const tooltip = await page.getByRole('tooltip').boundingBox();
+  expect(tooltip!.x).toBeGreaterThanOrEqual(0);
+  expect(tooltip!.x + tooltip!.width).toBeLessThanOrEqual(page.viewportSize()!.width);
+  await page.screenshot({ path: testInfo.outputPath('updated-partner.png'), fullPage: true });
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('tooltip')).toBeHidden();
+  await settled(page);
+});
+
+test('home works with reduced motion and at the narrowest supported width', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 320, height: 740 });
+  await page.goto('./');
+  await expect(page.locator('#intro-title')).toBeInViewport();
+  await page.locator('.scroll-cue').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('.pokedex-link')).toBeInViewport();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.locator('.pokedex-link').focus();
+  await page.keyboard.press('Enter');
+  await settled(page, 'selection');
+});
+
+test('the three balls reveal the requested Pokémon and can be opened again', async ({ page }, testInfo) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('pokedex.html');
   await expect(page.locator('.choice-name')).toHaveText(['규이리', '익상해씨', '영부기']);
   await expect(page.locator('.professor-normal')).toBeVisible();
   await expect(page.locator('#detail-view')).toBeHidden();
@@ -43,7 +107,7 @@ test('the three balls reveal the requested Pokémon and can be opened again', as
 
 test('the Pokémon travels left while the Pokédex enters from the right', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'Mobile uses the vertical layout.');
-  await page.goto('./');
+  await page.goto('pokedex.html');
   await page.locator('.pokeball-choice').nth(2).click();
   await page.waitForFunction(() => {
     const flyer = document.querySelector('.pokemon-flyer');
@@ -64,7 +128,7 @@ test('the Pokémon travels left while the Pokédex enters from the right', async
 });
 
 test('rapid clicks do not double-open, and Escape cancels an unfinished release', async ({ page }) => {
-  await page.goto('./');
+  await page.goto('pokedex.html');
   await page.locator('.pokeball-choice').first().click();
   await expect(page.locator('.pokeball-choice').nth(1)).toBeDisabled();
   await page.evaluate(() => document.querySelectorAll<HTMLButtonElement>('.pokeball-choice')[1].click());
@@ -110,14 +174,14 @@ test('previous, next, pagination, history and ability details work', async ({ pa
   await expect(page.locator('#member-name')).toHaveText('익상해씨');
   await page.locator('#back-button').click();
   await settled(page, 'selection');
-  await expect(page).toHaveURL(baseURL!);
+  await expect(page).toHaveURL(new URL('pokedex.html', baseURL).href);
   await page.goBack();
   await expect(page.locator('#member-name')).toHaveText('익상해씨');
 });
 
 test('keyboard activation and reduced motion retain the full functionality', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('./');
+  await page.goto('pokedex.html');
   await page.locator('.pokeball-choice').nth(2).focus();
   await page.keyboard.press('Enter');
   await settled(page);
@@ -132,7 +196,7 @@ test('keyboard activation and reduced motion retain the full functionality', asy
 
 test('missing artwork can be retried without locking the selection', async ({ page }) => {
   await page.route('**/images/gyuiri.png', route => route.abort());
-  await page.goto('./');
+  await page.goto('pokedex.html');
   await page.locator('.pokeball-choice').first().click();
   await settled(page, 'selection');
   await expect(page.locator('#announcement')).toContainText('이미지를 불러오지 못했어요');
@@ -173,7 +237,7 @@ test('a default detail URL restores the same Pokémon after browser Back', async
 });
 
 test('resizing while the ball opens and the Pokémon flies leaves a usable detail', async ({ page }) => {
-  await page.goto('./');
+  await page.goto('pokedex.html');
   await page.locator('.pokeball-choice').nth(2).click();
   await expect(page.locator('#scene')).toHaveAttribute('data-phase', 'opening');
   await page.setViewportSize({ width: 620, height: 760 });
