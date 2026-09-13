@@ -53,7 +53,7 @@ export const members: Member[] = [
     desc: '꼬리의 불꽃은 기분을 나타낸다. 즐거우면 흔들리고 화가 나면 맹렬히 불타오른다.',
     types: ['fire'],
     height: '178cm',
-    category: 'ESFP',
+    category: 'INFP',
     genders: ['M'],
     weight: '74kg',
     ability: '오뚜기',
