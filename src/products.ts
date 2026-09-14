@@ -1,4 +1,4 @@
-import { members } from './data';
+﻿import { members } from './data';
 
 // Temporary catalog: replace these examples with the real product details and images.
 const collections = [
@@ -10,12 +10,12 @@ const collections = [
 export const products = collections.flatMap(collection => members.map(member => ({
   id: `${collection.kind}-${member.id}`,
   memberId: member.id,
-  name: `${member.pokemonName} ${collection.name}`,
+  name: `${member.conemonName} ${collection.name}`,
   collection: collection.label,
   kind: collection.kind,
   description: collection.description,
   // Placeholder copy and specifications for the product detail view.
-  detailDescription: `${member.pokemonName}와 함께하는 작은 즐거움. 일상 속 소중한 순간을 담아 오래도록 간직해 보세요. 나만의 공간과 하루에 파트너의 이야기를 더해 보세요.`,
+  detailDescription: `${member.conemonName}와 함께하는 작은 즐거움. 일상 속 소중한 순간을 담아 오래도록 간직해 보세요. 나만의 공간과 하루에 파트너의 이야기를 더해 보세요.`,
   details: [
     { label: '상품 구성', value: '더미 데이터' },
     { label: '크기', value: '더미 데이터' },
@@ -23,7 +23,7 @@ export const products = collections.flatMap(collection => members.map(member => 
     { label: '상품 안내', value: '더미 데이터' },
   ],
   image: member.image,
-  character: member.pokemonName,
+  character: member.conemonName,
   no: member.no,
   color: member.color,
   background: member.softColor,

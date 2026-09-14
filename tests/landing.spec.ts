@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+﻿import { expect, test, type Page } from '@playwright/test';
 
 async function settled(page: Page, phase = 'detail') {
   await expect(page.locator('#scene')).toHaveAttribute('data-phase', phase);
@@ -19,7 +19,7 @@ test('home introduces the team, scrolls to silhouettes and leads to the Pokédex
   await expect(page.locator('.partner-silhouette').first()).toBeInViewport();
   await expect(page.locator('.pokedex-link')).toBeInViewport();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await page.getByRole('link', { name: '포켓몬 도감으로 이동하기' }).click();
+  await page.getByRole('link', { name: '코네몬 도감으로 이동하기' }).click();
   await settled(page, 'selection');
   await expect(page).toHaveURL(/\/pokedex\.html$/);
   await page.locator('.pokeball-choice').nth(1).click();
@@ -86,7 +86,7 @@ test('the three balls reveal the requested Pokémon and can be opened again', as
     await page.locator('.pokeball-choice').nth(index).click();
     await expect(page.locator('#scene')).toHaveAttribute('data-phase', 'opening');
     await expect.poll(() => page.locator('.ball-open').nth(index).evaluate(el => Number(getComputedStyle(el).opacity))).toBeGreaterThan(0.8);
-    await expect(page.locator('.pokemon-flyer')).toBeVisible();
+    await expect(page.locator('.conemon-flyer')).toBeVisible();
     await settled(page);
     await expect(page.locator('#member-name')).toHaveText(name);
     await expect(page.locator('#member-no')).toHaveText(no);
@@ -95,7 +95,7 @@ test('the three balls reveal the requested Pokémon and can be opened again', as
     expect(await page.locator('#member-image').evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
     await expect(page.locator('#member-name')).toBeFocused();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    await page.screenshot({ path: testInfo.outputPath(`pokemon-${index}.png`), fullPage: true });
+    await page.screenshot({ path: testInfo.outputPath(`conemon-${index}.png`), fullPage: true });
     await page.locator('#back-button').click();
     await settled(page, 'selection');
     await expect(page.locator('.pokeball-choice').nth(index)).toBeFocused();
@@ -110,12 +110,12 @@ test('the Pokémon travels left while the Pokédex enters from the right', async
   await page.goto('pokedex.html');
   await page.locator('.pokeball-choice').nth(2).click();
   await page.waitForFunction(() => {
-    const flyer = document.querySelector('.pokemon-flyer');
+    const flyer = document.querySelector('.conemon-flyer');
     if (!flyer) return false;
     const bounds = flyer.getBoundingClientRect();
     return bounds.width > 200 && bounds.left > innerWidth * 0.3;
   });
-  const atCenter = await page.locator('.pokemon-flyer').boundingBox();
+  const atCenter = await page.locator('.conemon-flyer').boundingBox();
   expect(atCenter).not.toBeNull();
   const entryX = await page.locator('.detail-info').evaluate(el => new DOMMatrixReadOnly(getComputedStyle(el).transform).m41);
   expect(entryX).toBeGreaterThan(0);
@@ -134,16 +134,16 @@ test('rapid clicks do not double-open, and Escape cancels an unfinished release'
   await page.evaluate(() => document.querySelectorAll<HTMLButtonElement>('.pokeball-choice')[1].click());
   await page.keyboard.press('Escape');
   await settled(page, 'selection');
-  await expect(page.locator('.pokemon-flyer')).toHaveCount(0);
+  await expect(page.locator('.conemon-flyer')).toHaveCount(0);
   await page.locator('.pokeball-choice').nth(1).click();
   await settled(page);
   await expect(page.locator('#member-name')).toHaveText('익상해씨');
   await page.locator('#back-button').click();
   await page.locator('.pokeball-choice').nth(2).click();
-  await expect(page.locator('.pokemon-flyer')).toBeVisible();
+  await expect(page.locator('.conemon-flyer')).toBeVisible();
   await page.keyboard.press('Escape');
   await settled(page, 'selection');
-  await expect(page.locator('.pokemon-flyer')).toHaveCount(0);
+  await expect(page.locator('.conemon-flyer')).toHaveCount(0);
 });
 
 test('previous, next, pagination, history and ability details work', async ({ page, baseURL }) => {
@@ -186,7 +186,7 @@ test('keyboard activation and reduced motion retain the full functionality', asy
   await page.keyboard.press('Enter');
   await settled(page);
   await expect(page.locator('#member-name')).toHaveText('영부기');
-  await expect(page.locator('.pokemon-flyer')).toHaveCount(0);
+  await expect(page.locator('.conemon-flyer')).toHaveCount(0);
   await page.keyboard.press('Escape');
   await settled(page, 'selection');
   await page.keyboard.press('Space');
@@ -241,11 +241,11 @@ test('resizing while the ball opens and the Pokémon flies leaves a usable detai
   await page.locator('.pokeball-choice').nth(2).click();
   await expect(page.locator('#scene')).toHaveAttribute('data-phase', 'opening');
   await page.setViewportSize({ width: 620, height: 760 });
-  await expect(page.locator('.pokemon-flyer')).toBeVisible();
+  await expect(page.locator('.conemon-flyer')).toBeVisible();
   await page.setViewportSize({ width: 1100, height: 800 });
   await settled(page);
   await expect(page.locator('#member-name')).toHaveText('영부기');
-  await expect(page.locator('.pokemon-flyer')).toHaveCount(0);
+  await expect(page.locator('.conemon-flyer')).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.locator('#back-button').click();
   await settled(page, 'selection');

@@ -1,4 +1,4 @@
-import { homeIntroduction, members } from './data';
+﻿import { homeIntroduction, members } from './data';
 import { basePath, imagePath } from './paths';
 import { enableInterfaceSounds } from './sound';
 
@@ -59,7 +59,7 @@ export function setupHome() {
             ${members.map(member => `
               <figure class="silhouette-figure" style="--partner-color: ${member.color}">
                 <span class="silhouette-question" aria-hidden="true">?</span>
-                <svg class="partner-silhouette" viewBox="${silhouettes[member.id].viewBox}" role="img" aria-label="${member.pokemonName}의 합성 포켓몬 실루엣">
+                <svg class="partner-silhouette" viewBox="${silhouettes[member.id].viewBox}" role="img" aria-label="${member.conemonName}의 합성 코네몬 실루엣">
                   <path d="${silhouettes[member.id].outline}" fill="currentColor" />
                 </svg>
                 <figcaption>${member.no}<span>UNKNOWN PARTNER</span></figcaption>
@@ -67,17 +67,17 @@ export function setupHome() {
             `).join('')}
           </div>
           <div class="partners-copy">
-            <p class="eyebrow"><span></span> WHO'S THAT POKÉMON?</p>
+            <p class="eyebrow"><span></span> WHO'S THAT CONEMON?</p>
             <h2 id="partners-title">어떤 친구들이<br />기다리고 있을까요?</h2>
             <p>실루엣 너머 숨겨진 반전 매력.<br />도감을 열어 우리를 조금 더 알아가 보세요.</p>
-            <a class="pokedex-link" href="${basePath}pokedex.html">포켓몬 도감으로 이동하기 <span aria-hidden="true">↗</span></a>
-            <span class="partners-note"><span class="tiny-ball" aria-hidden="true"></span> 세 개의 포켓볼에 담긴 세 가지 이야기</span>
+            <a class="pokedex-link" href="${basePath}pokedex.html">코네몬 도감으로 이동하기 <span aria-hidden="true">↗</span></a>
+            <span class="partners-note"><span class="tiny-ball" aria-hidden="true"></span> 세 개의 코네볼에 담긴 세 가지 이야기</span>
           </div>
         </div>
         </div>
       </section>
     </main>
-    <footer class="site-footer"><span>작은 만남에서 시작되는, 우리의 이야기.</span><span>GCS <span class="footer-cross">×</span> POKÉMON <span class="footer-year">2026</span></span></footer>
+    <footer class="site-footer"><span>작은 만남에서 시작되는, 우리의 이야기.</span><span>GCS <span class="footer-cross">×</span> CONEMON <span class="footer-year">2026</span></span></footer>
   `;
 
   enableInterfaceSounds(app);

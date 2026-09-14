@@ -1,4 +1,4 @@
-import { basePath } from './paths';
+﻿import { basePath } from './paths';
 import { renderSectionNavigation } from './navigation';
 import { products } from './products';
 import { members } from './data';
@@ -27,14 +27,14 @@ if (app) {
       <section class="store-intro">
         <div>
           <p class="eyebrow"><span></span> LITTLE THINGS, BIG ADVENTURES</p>
-          <h1 id="store-title">${partner ? `${partner.pokemonName}의 <em>작은 컬렉션.</em>` : '우리의 모험을 <em>소장하는 방법.</em>'}</h1>
+          <h1 id="store-title">${partner ? `${partner.conemonName}의 <em>작은 컬렉션.</em>` : '우리의 모험을 <em>소장하는 방법.</em>'}</h1>
           <p class="store-description">좋아하는 파트너와 함께하는 일상.<br />한 장의 사진처럼 오래 간직하고 싶은 작은 물건들을 모았어요.</p>
         </div>
         <div class="store-stamp" aria-hidden="true"><span class="pokeball-mark"></span><span>PARTNER GOODS<small>COLLECTION / 2026</small></span></div>
       </section>
       <section class="store-collection" aria-labelledby="collection-title">
         <div class="store-collection-heading">
-          <h2 id="collection-title">${partner ? `${partner.pokemonName} 상품` : '파트너 컬렉션'} <span>${String(visibleProducts.length).padStart(2, '0')}</span></h2>
+          <h2 id="collection-title">${partner ? `${partner.conemonName} 상품` : '파트너 컬렉션'} <span>${String(visibleProducts.length).padStart(2, '0')}</span></h2>
           ${partner ? `<a class="store-all-link" href="${basePath}store.html">전체 상품 보기 <span aria-hidden="true">↗</span></a>` : '<p>세 명의 파트너, 아홉 가지 작은 추억</p>'}
         </div>
         <ul class="product-grid">
@@ -81,7 +81,7 @@ if (app) {
         </div>
       </section>
     </main>
-    <footer class="site-footer"><span>작은 만남에서 시작되는, 우리의 이야기.</span><span>GCS <span class="footer-cross">×</span> POKÉMON <span class="footer-year">2026</span></span></footer>
+    <footer class="site-footer"><span>작은 만남에서 시작되는, 우리의 이야기.</span><span>GCS <span class="footer-cross">×</span> CONEMON <span class="footer-year">2026</span></span></footer>
     <p class="sr-only" id="store-announcement" role="status" aria-live="polite"></p>
   `;
 

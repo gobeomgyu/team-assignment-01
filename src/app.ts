@@ -1,9 +1,9 @@
-import { members, typeLabels, type Member } from './data';
+﻿import { members, typeLabels, type Member } from './data';
 import { basePath, imagePath } from './paths';
 import { enableInterfaceSounds, playSound } from './sound';
 import { renderSectionNavigation } from './navigation';
 
-const POKEDEX_TITLE = '포켓몬 도감 | 김박사의 연구소';
+const POKEDEX_TITLE = '코네몬 도감 | 김박사의 연구소';
 const OPEN_BALL_IMAGE = imagePath('pokeball_open.png');
 
 export function setupApp(startWithDetail = false) {
@@ -27,32 +27,32 @@ export function setupApp(startWithDetail = false) {
               <img class="oak-image professor-normal" src="${imagePath('professor.png')}" alt="연구소에서 반갑게 맞아주는 김박사" fetchpriority="high" />
               <img class="oak-image professor-hover" src="${imagePath('professor real.png')}" alt="연구소에서 반갑게 맞아주는 김박사" fetchpriority="high" />
             </div>
-            <span class="professor-caption"><span class="status-dot"></span> 김박사 <span>포켓몬 연구가</span></span>
+            <span class="professor-caption"><span class="status-dot"></span> 김박사 <span>코네몬 연구가</span></span>
           </div>
           <div class="welcome-copy">
             <p class="eyebrow"><span></span> EVERY ADVENTURE STARTS WITH A FRIEND</p>
             <h1 id="welcome-title">너의 첫 번째 <em>파트너</em>를<br />만날 시간이란다!</h1>
-            <p class="welcome-description">이곳에 세 마리의 포켓몬이 기다리고 있단다.<br />마음에 드는 포켓볼을 열어, 새로운 친구를 만나보렴.</p>
+            <p class="welcome-description">이곳에 세 마리의 코네몬이 기다리고 있단다.<br />마음에 드는 코네볼을 열어, 새로운 친구를 만나보렴.</p>
             <span class="professor-signature">— 김박사</span>
           </div>
         </div>
-        <div class="selection-heading"><span>CHOOSE YOUR PARTNER</span><span>세 개의 포켓볼, 새로운 모험의 시작</span></div>
+        <div class="selection-heading"><span>CHOOSE YOUR PARTNER</span><span>세 개의 코네볼, 새로운 모험의 시작</span></div>
         <div class="pokeballs-container" id="pokeballs-container">
           ${members.map((member, index) => `
-            <button class="pokeball-choice" type="button" data-member-id="${member.id}" style="--accent: ${member.color}; --accent-soft: ${member.softColor}" aria-label="${index + 1}번째 포켓볼 열기: ${member.pokemonName}">
+            <button class="pokeball-choice" type="button" data-member-id="${member.id}" style="--accent: ${member.color}; --accent-soft: ${member.softColor}" aria-label="${index + 1}번째 코네볼 열기: ${member.conemonName}">
               <span class="choice-number">0${index + 1}<span>${member.no}</span></span>
               <span class="ball-stage">
                 <span class="ball-halo"></span>
-                <img class="ball-closed" src="${imagePath('pokeball_closed.png')}" alt="닫힌 포켓볼" draggable="false" />
+                <img class="ball-closed" src="${imagePath('pokeball_closed.png')}" alt="닫힌 코네볼" draggable="false" />
                 <img class="ball-open" src="${OPEN_BALL_IMAGE}" alt="" aria-hidden="true" draggable="false" />
                 <span class="ball-flash" aria-hidden="true"></span>
               </span>
-              <span class="choice-copy"><span><span class="choice-name">${member.pokemonName}</span><span class="choice-english">${member.englishName}</span></span><span class="choice-arrow" aria-hidden="true">↗</span></span>
+              <span class="choice-copy"><span><span class="choice-name">${member.conemonName}</span><span class="choice-english">${member.englishName}</span></span><span class="choice-arrow" aria-hidden="true">↗</span></span>
               <span class="choice-hint"><span class="type-dot"></span>${member.introduction}</span>
             </button>
           `).join('')}
         </div>
-        <p class="selection-tip"><span class="tiny-ball" aria-hidden="true"></span> 포켓볼을 클릭하면 파트너가 나타나요</p>
+        <p class="selection-tip"><span class="tiny-ball" aria-hidden="true"></span> 코네볼을 클릭하면 파트너가 나타나요</p>
       </section>
       <section class="detail-view" id="detail-view" aria-label="파트너 도감" hidden inert>
         <div class="detail-backdrop" aria-hidden="true"></div>
@@ -63,14 +63,14 @@ export function setupApp(startWithDetail = false) {
         </div>
         <div class="pokedex-card">
           <div class="card-surface" aria-hidden="true"></div>
-          <div class="pokemon-visual">
+          <div class="conemon-visual">
             <div class="art-decoration" aria-hidden="true"><span class="art-orbit"></span><span class="art-number" id="art-number"></span></div>
-            <img id="member-image" class="pokemon-image" alt="" draggable="false" />
+            <img id="member-image" class="conemon-image" alt="" draggable="false" />
             <p class="art-caption"><span class="status-dot"></span><span id="art-caption"></span></p>
           </div>
           <article class="detail-info" aria-labelledby="member-name">
             <div class="detail-title detail-line"><span class="member-no" id="member-no"></span><h1 id="member-name" tabindex="-1"></h1><span class="member-english" id="member-english"></span></div>
-            <div class="detail-line"><span class="region-badge"><span aria-hidden="true">✓</span> 관동지방 · 첫 파트너 포켓몬</span><p class="member-desc" id="member-desc"></p></div>
+            <div class="detail-line"><span class="region-badge"><span aria-hidden="true">✓</span> 관동지방 · 첫 파트너 코네몬</span><p class="member-desc" id="member-desc"></p></div>
             <dl class="member-info-grid detail-line">
               <div class="info-item"><dt>타입</dt><dd class="types" id="member-types"></dd></div>
               <div class="info-item"><dt>키</dt><dd id="member-height"></dd></div>
@@ -86,14 +86,14 @@ export function setupApp(startWithDetail = false) {
             <a class="action-button detail-line member-store-link" id="member-store-link"><span id="member-store-label"></span><span aria-hidden="true">→</span></a>
           </article>
         </div>
-        <nav class="detail-navigation" aria-label="다른 포켓몬 보기">
+        <nav class="detail-navigation" aria-label="다른 코네몬 보기">
           <button class="nav-button" id="prev-btn" type="button"><span aria-hidden="true">←</span><span><small id="prev-no"></small><strong id="prev-name"></strong></span></button>
           <div class="dex-pagination" id="dex-pagination"></div>
           <button class="nav-button next-button" id="next-btn" type="button"><span><small id="next-no"></small><strong id="next-name"></strong></span><span aria-hidden="true">→</span></button>
         </nav>
       </section>
     </main>
-    <footer class="site-footer"><span>작은 만남에서 시작되는, 우리의 이야기.</span><span>GCS <span class="footer-cross">×</span> POKÉMON <span class="footer-year">2026</span></span></footer>
+    <footer class="site-footer"><span>작은 만남에서 시작되는, 우리의 이야기.</span><span>GCS <span class="footer-cross">×</span> CONEMON <span class="footer-year">2026</span></span></footer>
     <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
   `;
 
@@ -103,7 +103,7 @@ export function setupApp(startWithDetail = false) {
   const scene = get('scene');
   const landing = get('landing');
   const detail = get('detail-view');
-  const pokemonImage = get<HTMLImageElement>('member-image');
+  const conemonImage = get<HTMLImageElement>('member-image');
   const abilityHelp = get<HTMLButtonElement>('ability-help');
   const abilityWrapper = abilityHelp.parentElement!;
   const choices = [...document.querySelectorAll<HTMLButtonElement>('.pokeball-choice')];
@@ -202,9 +202,9 @@ export function setupApp(startWithDetail = false) {
     current = member;
     scene.style.setProperty('--accent', member.color);
     scene.style.setProperty('--accent-soft', member.softColor);
-    document.title = `${member.pokemonName} | 파트너 도감`;
+    document.title = `${member.conemonName} | 파트너 도감`;
     const values: Record<string, string> = {
-      'member-no': member.no, 'member-name': member.pokemonName,
+      'member-no': member.no, 'member-name': member.conemonName,
       'member-english': member.englishName, 'member-desc': member.desc,
       'member-height': member.height, 'member-category': member.category,
       'member-weight': member.weight, 'member-ability': member.ability,
@@ -216,24 +216,24 @@ export function setupApp(startWithDetail = false) {
     };
     Object.entries(values).forEach(([id, value]) => { get(id).textContent = value; });
     get<HTMLAnchorElement>('member-store-link').href = `${basePath}store.html?partner=${member.id}`;
-    get('member-store-label').textContent = `${member.pokemonName} 상품 보러가기`;
-    pokemonImage.width = member.imageSize[0];
-    pokemonImage.height = member.imageSize[1];
-    pokemonImage.style.setProperty('--art-ratio', String(member.imageSize[0] / member.imageSize[1]));
-    pokemonImage.dataset.pokemon = member.englishName.toLowerCase();
-    pokemonImage.src = member.image;
-    pokemonImage.alt = member.pokemonName;
+    get('member-store-label').textContent = `${member.conemonName} 상품 보러가기`;
+    conemonImage.width = member.imageSize[0];
+    conemonImage.height = member.imageSize[1];
+    conemonImage.style.setProperty('--art-ratio', String(member.imageSize[0] / member.imageSize[1]));
+    conemonImage.dataset.conemon = member.englishName.toLowerCase();
+    conemonImage.src = member.image;
+    conemonImage.alt = member.conemonName;
     get('member-types').innerHTML = member.types.map(type => `<span class="type-badge type-${type}">${typeLabels[type]}</span>`).join('');
     get('member-genders').innerHTML = member.genders.map(gender => `<span class="gender-${gender.toLowerCase()}" aria-label="${gender === 'M' ? '수컷' : '암컷'}">${gender === 'M' ? '♂' : '♀'}</span>`).join('');
     const index = members.indexOf(member);
     const previous = members[(index + members.length - 1) % members.length];
     const next = members[(index + 1) % members.length];
     get('prev-no').textContent = previous.no;
-    get('prev-name').textContent = previous.pokemonName;
+    get('prev-name').textContent = previous.conemonName;
     get('next-no').textContent = next.no;
-    get('next-name').textContent = next.pokemonName;
+    get('next-name').textContent = next.conemonName;
     get('detail-counter').textContent = `0${index + 1} / 03`;
-    get('dex-pagination').innerHTML = members.map(item => `<button class="dex-dot ${item.id === member.id ? 'is-current' : ''}" type="button" data-id="${item.id}" aria-label="${item.pokemonName} 도감 보기" ${item.id === member.id ? 'aria-current="true"' : ''}></button>`).join('');
+    get('dex-pagination').innerHTML = members.map(item => `<button class="dex-dot ${item.id === member.id ? 'is-current' : ''}" type="button" data-id="${item.id}" aria-label="${item.conemonName} 도감 보기" ${item.id === member.id ? 'aria-current="true"' : ''}></button>`).join('');
   }
 
   function showSelection(focus = true, pushHistory = true) {
@@ -253,7 +253,7 @@ export function setupApp(startWithDetail = false) {
     setBusy(false);
     if (pushHistory) updateUrl();
     if (focus) lastChoice.focus({ preventScroll: true });
-    get('announcement').textContent = '포켓볼을 골라 다른 파트너를 만나보세요.';
+    get('announcement').textContent = '코네볼을 골라 다른 파트너를 만나보세요.';
   }
 
   function finishDetail(member: Member, focus = true) {
@@ -266,7 +266,7 @@ export function setupApp(startWithDetail = false) {
     cancelAnimations();
     setBusy(false);
     if (focus) get('member-name').focus({ preventScroll: true });
-    get('announcement').textContent = `${member.pokemonName} 등장! ${member.types.map(type => typeLabels[type]).join(', ')} 타입의 ${member.category}입니다.`;
+    get('announcement').textContent = `${member.conemonName} 등장! ${member.types.map(type => typeLabels[type]).join(', ')} 타입의 ${member.category}입니다.`;
   }
 
   function slideIn(element: Element, duration: number, delay = 0, distance = '110vw') {
@@ -283,13 +283,13 @@ export function setupApp(startWithDetail = false) {
     lastChoice = button;
     setBusy(true);
     scene.dataset.phase = 'opening';
-    get('announcement').textContent = `${member.pokemonName}의 포켓볼을 열고 있어요.`;
+    get('announcement').textContent = `${member.conemonName}의 코네볼을 열고 있어요.`;
     try {
       await Promise.all([preload(member.image), preload(OPEN_BALL_IMAGE)]);
     } catch {
       if (run !== sequence) return;
       showSelection();
-      get('announcement').textContent = '이미지를 불러오지 못했어요. 포켓볼을 다시 눌러 주세요.';
+      get('announcement').textContent = '이미지를 불러오지 못했어요. 코네볼을 다시 눌러 주세요.';
       return;
     }
     if (run !== sequence) return;
@@ -325,14 +325,14 @@ export function setupApp(startWithDetail = false) {
 
     // Measure after opening, since the viewport may have changed during the shake.
     const ballRect = button.querySelector<HTMLElement>('.ball-stage')!.getBoundingClientRect();
-    const target = pokemonImage.getBoundingClientRect();
+    const target = conemonImage.getBoundingClientRect();
     const startX = ballRect.left + ballRect.width / 2 - target.left - target.width / 2;
     const startY = ballRect.top + ballRect.height / 2 - target.top - target.height / 2;
     const middleX = window.innerWidth / 2 - target.left - target.width / 2;
     const middleY = Math.min(window.innerHeight * 0.4, 360) - target.top - target.height / 2;
-    flyer = pokemonImage.cloneNode() as HTMLImageElement;
+    flyer = conemonImage.cloneNode() as HTMLImageElement;
     flyer.removeAttribute('id');
-    flyer.className = 'pokemon-flyer';
+    flyer.className = 'conemon-flyer';
     flyer.alt = '';
     flyer.setAttribute('aria-hidden', 'true');
     Object.assign(flyer.style, { left: `${target.left}px`, top: `${target.top}px`, width: `${target.width}px`, height: `${target.height}px` });
@@ -378,7 +378,7 @@ export function setupApp(startWithDetail = false) {
     }
     if (run !== sequence) return;
     await Promise.all([
-      animate(pokemonImage, [{ opacity: 1, transform: 'translateX(0)' }, { opacity: 0, transform: 'translateX(-35px)' }], 180),
+      animate(conemonImage, [{ opacity: 1, transform: 'translateX(0)' }, { opacity: 0, transform: 'translateX(-35px)' }], 180),
       animate(detail.querySelector('.detail-info')!, [{ opacity: 1 }, { opacity: 0 }], 180),
     ]);
     if (run !== sequence) return;
@@ -386,7 +386,7 @@ export function setupApp(startWithDetail = false) {
     playSound('appear');
     setBusy(true);
     await Promise.all([
-      animate(pokemonImage, [{ opacity: 0, transform: 'translateX(60px) scale(0.9)' }, { opacity: 1, transform: 'translateX(0) scale(1)' }], 600),
+      animate(conemonImage, [{ opacity: 0, transform: 'translateX(60px) scale(0.9)' }, { opacity: 1, transform: 'translateX(0) scale(1)' }], 600),
       slideIn(detail.querySelector('.detail-info')!, 650, 60),
     ]);
     if (run !== sequence) return;
