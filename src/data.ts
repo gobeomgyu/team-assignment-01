@@ -1,4 +1,4 @@
-﻿import { imagePath } from './paths';
+import { imagePath } from './paths';
 
 export type ConemonType = 'fire' | 'grass' | 'poison' | 'water';
 
@@ -48,8 +48,8 @@ export const members: Member[] = [
     name: '한영민',
     conemonName: '규이리',
     englishName: 'CHARMANDER',
-    no: 'No. 0004',
-    desc: '꼬리의 불꽃은 기분을 나타낸다. 즐거우면 흔들리고 화가 나면 맹렬히 불타오른다.',
+    no: 'No. 0036',
+    desc: '친화력이 좋고 사람을 좋아한다. .',
     types: ['fire'],
     height: '178cm',
     category: 'ESFP',

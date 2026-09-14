@@ -1,4 +1,4 @@
-import { members, typeLabels, type Member } from './data';
+﻿import { members, typeLabels, type Member } from './data';
 import { basePath, imagePath } from './paths';
 import { enableInterfaceSounds, playSound } from './sound';
 import { renderSectionNavigation } from './navigation';
@@ -58,7 +58,7 @@ export function setupApp(startWithDetail = false) {
         <div class="detail-backdrop" aria-hidden="true"></div>
         <div class="detail-topbar">
           <button class="back-button" id="back-button" type="button"><span aria-hidden="true">←</span> 다시 선택하기</button>
-          <span class="detail-topbar-title">PARTNER POKÉDEX <span>관동지방 도감</span></span>
+          <span class="detail-topbar-title">PARTNER POKÉDEX <span>태평지방 도감</span></span>
           <span class="detail-counter" id="detail-counter"></span>
         </div>
         <div class="pokedex-card">
@@ -70,7 +70,7 @@ export function setupApp(startWithDetail = false) {
           </div>
           <article class="detail-info" aria-labelledby="member-name">
             <div class="detail-title detail-line"><span class="member-no" id="member-no"></span><h1 id="member-name" tabindex="-1"></h1><span class="member-english" id="member-english"></span></div>
-            <div class="detail-line"><span class="region-badge"><span aria-hidden="true">✓</span> 관동지방 · 첫 파트너 코네몬</span><p class="member-desc" id="member-desc"></p></div>
+            <div class="detail-line"><span class="region-badge"><span aria-hidden="true">✓</span> 태평지방 · 파트너 코네몬</span><p class="member-desc" id="member-desc"></p></div>
             <dl class="member-info-grid detail-line">
               <div class="info-item"><dt>타입</dt><dd class="types" id="member-types"></dd></div>
               <div class="info-item"><dt>키</dt><dd id="member-height"></dd></div>
