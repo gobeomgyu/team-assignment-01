@@ -32,12 +32,11 @@ export const typeLabels: Record<PokemonType, string> = {
 
 // Temporary home copy. Replace these strings when the team introduction is ready.
 export const homeIntroduction = {
-  eyebrow: 'WELCOME TO OUR LITTLE WORLD',
+  eyebrow: 'WELCOME TO OUR CONE JOURNEY',
   title: '서로 다른 우리가 만나,',
   highlight: '하나의 모험이 되다.',
   paragraphs: [
-    '안녕하세요! 각자의 개성과 이야기를 가진 세 사람이 모였습니다.',
-    '좋아하는 것도, 잘하는 것도 조금씩 다르지만 새로운 도전을 향한 마음은 같아요. 함께 배우고 성장하는 우리들의 이야기를 만나보세요.',
+    '각자의 개성과 이야기를 가진 세 사람이 모였습니다.<br />좋아하는 것도, 잘하는 것도 조금씩 다르지만 새로운 도전을 향한 마음은 같아요. 함께 배우고 성장하는 우리들의 이야기를 만나보세요.',
   ],
 };
 

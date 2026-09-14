@@ -16,7 +16,7 @@ export function setupApp(startWithDetail = false) {
         <span class="pokeball-mark" aria-hidden="true"></span>
         <span>김박사의 연구소<span class="brand-subtitle">PROFESSOR KIM'S LAB</span></span>
       </a>
-      <div class="header-location"><span class="status-dot"></span> 태초마을 <span class="location-divider">/</span> KANTO REGION</div>
+      <div class="header-location"><span class="status-dot"></span> 코네마을 <span class="location-divider">/</span> CONE REGION</div>
     </header>
     ${renderSectionNavigation('pokedex')}
     <main class="scene" id="scene" data-phase="selection">
