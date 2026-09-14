@@ -83,7 +83,7 @@ export function setupApp(startWithDetail = false) {
               <div class="info-item"><dt>추가 정보 3</dt><dd id="member-extra-info-3"></dd></div>
             </dl>
 
-            <button class="action-button detail-line" id="choose-again" style="margin-top: 10px;" type="button">다른 파트너도 만나보기 <span aria-hidden="true">→</span></button>
+            <a class="action-button detail-line member-store-link" id="member-store-link"><span id="member-store-label"></span><span aria-hidden="true">→</span></a>
           </article>
         </div>
         <nav class="detail-navigation" aria-label="다른 포켓몬 보기">
@@ -215,6 +215,8 @@ export function setupApp(startWithDetail = false) {
       'art-number': member.no.replace('No. ', ''), 'art-caption': member.introduction,
     };
     Object.entries(values).forEach(([id, value]) => { get(id).textContent = value; });
+    get<HTMLAnchorElement>('member-store-link').href = `${basePath}store.html?partner=${member.id}`;
+    get('member-store-label').textContent = `${member.pokemonName} 상품 보러가기`;
     pokemonImage.width = member.imageSize[0];
     pokemonImage.height = member.imageSize[1];
     pokemonImage.style.setProperty('--art-ratio', String(member.imageSize[0] / member.imageSize[1]));
@@ -399,7 +401,6 @@ export function setupApp(startWithDetail = false) {
     });
   });
   get('back-button').addEventListener('click', () => showSelection());
-  get('choose-again').addEventListener('click', () => showSelection());
   get('prev-btn').addEventListener('click', () => {
     if (current) void switchMember(members[(members.indexOf(current) + members.length - 1) % members.length]);
   });

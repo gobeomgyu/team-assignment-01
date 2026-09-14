@@ -9,13 +9,24 @@ const collections = [
 
 export const products = collections.flatMap(collection => members.map(member => ({
   id: `${collection.kind}-${member.id}`,
+  memberId: member.id,
   name: `${member.pokemonName} ${collection.name}`,
   collection: collection.label,
   kind: collection.kind,
   description: collection.description,
+  // Placeholder copy and specifications for the product detail view.
+  detailDescription: `${member.pokemonName}와 함께하는 작은 즐거움. 일상 속 소중한 순간을 담아 오래도록 간직해 보세요. 나만의 공간과 하루에 파트너의 이야기를 더해 보세요.`,
+  details: [
+    { label: '상품 구성', value: '더미 데이터' },
+    { label: '크기', value: '더미 데이터' },
+    { label: '소재', value: '더미 데이터' },
+    { label: '상품 안내', value: '더미 데이터' },
+  ],
   image: member.image,
   character: member.pokemonName,
   no: member.no,
   color: member.color,
   background: member.softColor,
 })));
+
+export type Product = (typeof products)[number];
