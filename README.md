@@ -1,19 +1,8 @@
-<<<<<<< HEAD
-﻿# team-assignment-01
-
-코네몬 도감 컨셉의 GCS 9기 팀원 소개 랜딩 페이지입니다. 코네볼을 클릭해 코네몬 애니메이션과 함께 팀원 정보를 확인할 수 있으며, 모바일과 데스크톱 환경을 모두 지원하는 정적 웹사이트입니다.
-
-## 대상
-- **웹사이트**: [https://hanyoungmin13.github.io/tut01/](https://hanyoungmin13.github.io/tut01/)
-- **저장소**: [https://github.com/gobeomgyu/team-assignment-01](https://github.com/gobeomgyu/team-assignment-01)
-- **데이터 관리**: `src/data.ts` (코네몬 정보 및 팀원 이름)
-=======
 # OUR LITTLE WORLD
 
 > 포켓몬 세계관으로 풀어낸 세 사람의 인터랙티브 팀 소개 웹사이트
 
 `OUR LITTLE WORLD`는 세 명의 팀원을 포켓몬 캐릭터로 재해석한 반응형 팀 소개 프로젝트입니다. 사용자는 김박사의 연구소에 방문해 실루엣 속 파트너를 만나고, 포켓볼을 열어 캐릭터의 정체와 이야기를 발견합니다.
->>>>>>> 02dc1b07fccea219b848065c3c5aa1a5d6c4331a
 
 도감에서 만난 규이리·익상해씨·영부기는 스토어의 체인 배지와 그립톡으로 이어집니다. 팀원 정보를 단순히 나열하는 대신, 사용자가 직접 선택하고 탐색하며 각자의 개성과 에피소드를 알아가도록 설계했습니다.
 
@@ -128,12 +117,10 @@ npm run dev
 
 Vite 기본 경로는 `/team-assignment-01/`입니다. Windows PowerShell에서 실행 정책 오류가 발생하면 `npm.cmd install`, `npm.cmd run dev`를 사용하세요.
 
-<<<<<<< HEAD
 ## 관리
-코네몬 정보 및 팀원 데이터는 `src/data.ts`에서 수정하고, 코네몬 이동 및 도감 표시 등 애니메이션 동작은 `src/app.ts`에서 제어합니다. 이미지는 `public/images/`에 위치하며 `src/paths.ts`가 Vite 배포 경로에 맞게 연결합니다. 키보드(Enter, Space, Escape)로도 도감을 조작할 수 있으며 기기의 동작 줄이기 설정을 따릅니다.
-=======
+<sub>코네몬 정보 및 팀원 데이터는 <code>src/data.ts</code>에서 수정하고, 코네몬 이동 및 도감 표시 등 애니메이션 동작은 <code>src/app.ts</code>에서 제어합니다. 이미지는 <code>public/images/</code>에 위치하며 <code>src/paths.ts</code>가 Vite 배포 경로에 맞게 연결합니다. 키보드(Enter, Space, Escape)로도 도감을 조작할 수 있으며 기기의 동작 줄이기 설정을 따릅니다.</sub>
+
 ## 품질 확인
->>>>>>> 02dc1b07fccea219b848065c3c5aa1a5d6c4331a
 
 ```bash
 npm run build
@@ -164,7 +151,6 @@ Playwright를 이용해 데스크톱과 모바일 환경에서 다음 항목을 
 
 홈·도감·스토어가 하나의 세계관으로 연결되고, 팀의 개성과 유머·애니메이션·접근성·반응형 설계가 하나의 웹 경험으로 결합되는 것이 프로젝트의 핵심입니다.
 
-<<<<<<< HEAD
 코네볼은 왼쪽부터 **파이리 → 이상해씨 → 꼬부기**입니다. 클릭하면 코네볼이 열리고 코네몬이 튀어나와 왼쪽으로 이동하며, 도감 배경과 정보는 오른쪽에서 들어옵니다. 휴대폰에서는 코네몬 아래에 정보를 배치합니다.
 
 도감에서는 이전·다음 코네몬, 다시 선택하기, 특성 설명을 사용할 수 있습니다. 키보드 Enter·Space로 선택하고 Escape로 돌아갈 수 있으며, 기기의 동작 줄이기 설정을 따릅니다.
@@ -184,8 +170,8 @@ Git을 사용하지 않는 경우에는 GitHub의 초록색 **Code** 버튼을 �
 npm install
 npm run dev
 ```
-=======
 ## Repository
 
 [https://github.com/gobeomgyu/team-assignment-01](https://github.com/gobeomgyu/team-assignment-01)
->>>>>>> 02dc1b07fccea219b848065c3c5aa1a5d6c4331a
+
+[칸반 보드](https://github.com/users/gobeomgyu/projects/2/views/1)
