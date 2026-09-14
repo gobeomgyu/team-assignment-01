@@ -173,3 +173,5 @@ npm run dev
 ## Repository
 
 [https://github.com/gobeomgyu/team-assignment-01](https://github.com/gobeomgyu/team-assignment-01)
+
+[칸반 보드](https://github.com/users/gobeomgyu/projects/2/views/1)
