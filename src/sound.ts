@@ -79,17 +79,22 @@ export function playSound(kind: SoundKind = 'click') {
 
 function startBackgroundMusic() {
   if (bgmStarted) return;
-  bgmStarted = true;
-  const audio = new Audio('/audio/title%20music.m4a');
+  const audioUrl = import.meta.env.BASE_URL + 'audio/title%20music.m4a';
+  const audio = new Audio(audioUrl);
   audio.loop = true;
   audio.volume = 0.3;
-  audio.play().catch(err => {
-    console.warn('BGM play failed (maybe autoplay policy), will retry on next interaction', err);
+  audio.play().then(() => {
+    bgmStarted = true;
+  }).catch(err => {
+    console.warn('BGM autoplay failed, waiting for user interaction:', err);
     bgmStarted = false;
   });
 }
 
 export function enableInterfaceSounds(root: Document | HTMLElement = document) {
+  // Try to play immediately (may fail due to browser autoplay policy)
+  startBackgroundMusic();
+
   root.addEventListener('pointerdown', startBackgroundMusic, { once: true });
   root.addEventListener('keydown', startBackgroundMusic, { once: true });
 
