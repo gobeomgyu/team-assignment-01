@@ -49,7 +49,7 @@ export const members: Member[] = [
     conemonName: '규이리',
     englishName: 'CHARMANDER',
     no: 'No. 0036',
-    desc: '친화력이 좋고 사람을 좋아한다. .',
+    desc: '친화력이 좋고 사람을 좋아한다.\n취미는 음악감상, 영화, 운동, 게임, 독서 등이 있다.',
     types: ['fire'],
     height: '178cm',
     category: 'ESFP',
@@ -64,7 +64,7 @@ export const members: Member[] = [
     imageSize: [325, 336],
     color: '#e66a35',
     softColor: '#fff0e6',
-    introduction: '작은 불꽃, 커다란 열정',
+    introduction: '안정형의 표본',
   },
   {
     id: 1,
