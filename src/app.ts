@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿import { members, typeLabels, type Member } from './data';
-=======
-  import { members, typeLabels, type Member } from './data';
->>>>>>> 02dc1b07fccea219b848065c3c5aa1a5d6c4331a
+import { members, typeLabels, type Member } from './data';
 import { basePath, imagePath } from './paths';
 import { enableInterfaceSounds, playSound } from './sound';
 import { renderSectionNavigation } from './navigation';
