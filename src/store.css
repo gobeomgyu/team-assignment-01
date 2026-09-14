@@ -27,20 +27,11 @@
 .product-grid > li:nth-child(3n + 2) .photo-tape { transform: translateX(-50%) rotate(5deg); background: #d6dfcec4; }
 .product-grid > li:nth-child(3n) .photo-tape { background: #d7e1e6c4; }
 .product-scene { position: relative; display: grid; place-items: center; overflow: hidden; aspect-ratio: 1; background-color: var(--product-background); background-image: radial-gradient(ellipse at 12% 5%, #ffffff80, transparent 60%), linear-gradient(145deg, transparent 60%, #3636280c); }
-.product-scene::after { content: ''; position: absolute; left: 18%; right: 18%; bottom: 10%; height: 14%; border-radius: 50%; background: #36362812; filter: blur(10px); }
-.product-scene-number { position: absolute; top: 15px; left: 15px; color: var(--product-accent); opacity: .7; font-size: 8px; letter-spacing: 1px; }
-.product-object { position: relative; z-index: 1; display: flex; align-items: center; flex-direction: column; width: 61%; padding: 10px 9px 12px; background: #fffefc; border: 1px solid #3535290a; border-radius: 6px; box-shadow: 5px 10px 12px #3e3b2820; transform: rotate(-7deg); }
-.product-image { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; mix-blend-mode: multiply; }
-.product-print-label { color: #90917f; font-size: 5px; letter-spacing: .6px; margin-bottom: 7px; white-space: nowrap; }
-.product-print-name { font-size: 11px; font-weight: 700; letter-spacing: -.4px; color: var(--product-accent); margin-top: 5px; }
-.product-print-name small { display: block; font-family: Georgia, serif; font-size: 7px; font-style: italic; font-weight: 400; letter-spacing: .3px; color: #a4a392; text-align: center; margin-top: 4px; }
-.product-scene--sticker .product-object { width: 67%; aspect-ratio: 1; border-radius: 50%; padding: 9px; justify-content: center; transform: rotate(7deg); box-shadow: 3px 5px 4px #3e3b281a; }
-.product-scene--sticker .product-object::after { content: ''; position: absolute; inset: 4px; border: 1px dashed #d6d7c7; border-radius: 50%; }
-.product-scene--sticker .product-image { width: 88%; border-radius: 50%; }
-.product-scene--sticker .product-print-label, .product-scene--sticker .product-print-name { display: none; }
-.product-scene--poster .product-object { width: 63%; border-radius: 0; padding: 14px 10px 10px; transform: rotate(6deg); box-shadow: 5px 8px 10px #3e3b2820; }
-.product-scene--poster .product-print-label { width: 100%; padding-bottom: 7px; border-bottom: 1px solid #e7e9de; text-align: center; }
-.product-scene--poster .product-print-name { align-self: stretch; border-top: 1px solid #e7e9de; margin-top: 6px; padding-top: 8px; text-align: center; }
+.product-scene-number { position: absolute; z-index: 1; top: 15px; left: 15px; color: var(--product-accent); opacity: .7; font-size: 8px; letter-spacing: 1px; }
+.product-image-window { position: relative; width: 100%; overflow: hidden; }
+.product-image { position: absolute; display: block; max-width: none; }
+.product-scene--chain-badge .product-image-window { width: 94%; border-radius: 5px; box-shadow: 0 6px 14px #3e3b2814; }
+.product-scene--griptok { background: #fff; }
 .product-caption { padding: 19px 9px 17px; }
 .product-category { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 8px; letter-spacing: 1.3px; font-weight: 600; color: var(--product-accent); }
 .product-availability { font-size: 9px; font-weight: 400; letter-spacing: 0; color: #90917f; white-space: nowrap; }
@@ -84,9 +75,6 @@
   .product-card { padding: 10px 10px 0; }
   .product-caption { padding-inline: 3px; }
   .product-caption h3 { font-size: 15px; }
-  .product-print-label { font-size: 4px; letter-spacing: .1px; }
-  .product-print-name { font-size: 9px; }
-  .product-print-name small { font-size: 6px; }
 }
 @media (max-width: 700px) {
   .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -114,11 +102,6 @@
   .product-card { padding: 7px 7px 0; }
   .photo-tape { width: 48px; height: 18px; top: -8px; }
   .product-scene-number { top: 9px; left: 9px; font-size: 6px; letter-spacing: .5px; }
-  .product-object { width: 66%; padding: 7px 5px; border-radius: 4px; }
-  .product-print-label { display: none; }
-  .product-print-name { font-size: 7px; margin-top: 4px; }
-  .product-print-name small { font-size: 4px; letter-spacing: 0; margin-top: 2px; }
-  .product-scene--poster .product-object { padding: 10px 5px 7px; }
   .product-caption { padding: 13px 3px 12px; }
   .product-category { font-size: 6px; letter-spacing: .5px; gap: 3px; }
   .product-availability { font-size: 8px; }
