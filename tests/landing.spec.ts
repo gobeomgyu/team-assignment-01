@@ -138,7 +138,7 @@ test('rapid clicks do not double-open, and Escape cancels an unfinished release'
   await page.locator('.pokeball-choice').nth(1).click();
   await settled(page);
   await expect(page.locator('#member-name')).toHaveText('익상해씨');
-  await page.locator('#choose-again').click();
+  await page.locator('#back-button').click();
   await page.locator('.pokeball-choice').nth(2).click();
   await expect(page.locator('.pokemon-flyer')).toBeVisible();
   await page.keyboard.press('Escape');

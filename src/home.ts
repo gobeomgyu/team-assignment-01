@@ -52,6 +52,7 @@ export function setupHome() {
         <a class="scroll-cue" href="#meet-partners"><span>아래로 내려 새로운 친구들을 만나보세요</span><span aria-hidden="true">↓</span></a>
       </section>
       <section class="home-partners" id="meet-partners" aria-labelledby="partners-title">
+        <div class="partners-reveal">
         <div class="partners-heading"><span>01 / MEET OUR PARTNERS</span><span>아직 발견하지 못한 우리들의 모습</span></div>
         <div class="partners-panel">
           <div class="silhouette-gallery" aria-label="세 파트너의 실루엣">
@@ -73,10 +74,51 @@ export function setupHome() {
             <span class="partners-note"><span class="tiny-ball" aria-hidden="true"></span> 세 개의 포켓볼에 담긴 세 가지 이야기</span>
           </div>
         </div>
+        </div>
       </section>
     </main>
     <footer class="site-footer"><span>작은 만남에서 시작되는, 우리의 이야기.</span><span>GCS <span class="footer-cross">×</span> POKÉMON <span class="footer-year">2026</span></span></footer>
   `;
 
   enableInterfaceSounds(app);
+
+  const section = app.querySelector<HTMLElement>('.home-partners')!;
+  const invitation = app.querySelector<HTMLElement>('.partners-reveal')!;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let entrance: Animation | undefined;
+  let observer: IntersectionObserver | undefined;
+  let revealed = false;
+
+  function revealPartners(animate = true) {
+    if (revealed) return;
+    revealed = true;
+    observer?.disconnect();
+    const bounds = section.getBoundingClientRect();
+    invitation.classList.remove('is-waiting');
+    if (!animate || reducedMotion.matches || bounds.bottom <= 0) return;
+    entrance = invitation.animate([
+      { transform: `translateY(${Math.max(120, window.innerHeight - bounds.top + 60)}px)`, opacity: 0 },
+      { opacity: 1, offset: 0.3 },
+      { transform: 'translateY(0)', opacity: 1 },
+    ], { duration: 1100, easing: 'cubic-bezier(.22, 1, .36, 1)' });
+  }
+
+  if (!reducedMotion.matches) {
+    invitation.classList.add('is-waiting');
+    // Observe the stationary section so the translated content cannot delay its own entrance.
+    observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) revealPartners();
+    }, { rootMargin: '0px 0px -48px 0px' });
+    observer.observe(section);
+  }
+  invitation.addEventListener('focusin', () => {
+    revealPartners(false);
+    entrance?.finish();
+  });
+  reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) {
+      entrance?.cancel();
+      revealPartners(false);
+    }
+  });
 }

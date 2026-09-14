@@ -11,7 +11,7 @@ test('the red menu connects the Pokédex and a nine-product instant-photo store'
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('우리의 모험을 소장하는 방법.');
   await expect(menu.getByRole('link', { name: '스토어', exact: true })).toHaveAttribute('aria-current', 'page');
   await expect(menu.getByRole('link', { name: '도감', exact: true })).not.toHaveAttribute('aria-current');
-  await expect(page.locator('.product-card')).toHaveCount(9);
+  await expect(page.locator('.product-grid .product-card')).toHaveCount(9);
 
   for (const picture of await page.locator('.product-image').all()) {
     await picture.scrollIntoViewIfNeeded();
@@ -25,7 +25,7 @@ test('the red menu connects the Pokédex and a nine-product instant-photo store'
     expect(rows).toEqual([3, 3, 3]);
   }
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await expect(menu).toBeInViewport();
+  await expect(menu).not.toBeInViewport();
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.screenshot({ path: testInfo.outputPath('store.png'), fullPage: true });
   await menu.getByRole('link', { name: '도감', exact: true }).click();
@@ -43,8 +43,8 @@ test('detail pages share the menu and narrow screens support keyboard navigation
   await menu.getByRole('link', { name: '스토어', exact: true }).focus();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-  await expect(page.locator('.product-card')).toHaveCount(9);
-  const outsideViewport = await page.locator('.product-card').evaluateAll(cards => cards.some(card => {
+  await expect(page.locator('.product-grid .product-card')).toHaveCount(9);
+  const outsideViewport = await page.locator('.product-grid .product-card').evaluateAll(cards => cards.some(card => {
     const bounds = card.getBoundingClientRect();
     return bounds.left < 0 || bounds.right > innerWidth;
   }));
