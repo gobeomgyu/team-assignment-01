@@ -41,13 +41,6 @@ export const products = collections.flatMap(collection => members.map(member => 
   kind: collection.kind,
   description: collection.description,
   detailDescription: `${member.conemonName}와 함께하는 작은 즐거움. ${collection.story}`,
-  // Specifications remain placeholders until the team confirms them.
-  details: [
-    { label: '상품 구성', value: '더미 데이터' },
-    { label: '크기', value: '더미 데이터' },
-    { label: '소재', value: '더미 데이터' },
-    { label: '상품 안내', value: '더미 데이터' },
-  ],
   image: collection.image,
   imageSize: collection.imageSize,
   imageCrop: collection.crops[member.id],

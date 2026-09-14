@@ -73,7 +73,6 @@ if (app) {
               <h2>상품 설명</h2>
               <p id="product-description"></p>
             </div>
-            <dl class="product-specs product-detail-line" id="product-specs"></dl>
             <p class="product-detail-note product-detail-line"><span class="status-dot"></span> 파트너와 함께할 작은 추억을 준비하고 있어요.</p>
             <button class="action-button product-detail-line" id="product-back-bottom" type="button">상품 목록으로 돌아가기 <span aria-hidden="true">→</span></button>
             <a class="product-dex-link product-detail-line" id="product-dex-link"></a>

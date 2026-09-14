@@ -76,7 +76,7 @@ test('a product flies left while its story enters from the right, then restores 
   await expect(page.locator('#product-title')).toHaveText('영부기 그립톡');
   await expect(page.locator('#product-counter')).toHaveText('06 / 06');
   await expect(page.locator('#product-title')).toBeFocused();
-  await expect(page.locator('#product-specs dd')).toHaveText(Array(4).fill('더미 데이터'));
+  await expect(page.locator('#product-detail')).not.toContainText('더미 데이터');
   await expect(page.locator('#product-description')).not.toBeEmpty();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: testInfo.outputPath('product-detail.png'), fullPage: true });

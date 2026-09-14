@@ -60,7 +60,6 @@ export function setupProductDetails(app: HTMLElement) {
     get('product-collection').textContent = product.collection;
     get('product-tagline').textContent = product.description;
     get('product-description').textContent = product.detailDescription;
-    get('product-specs').innerHTML = product.details.map(item => `<div><dt>${item.label}</dt><dd>${item.value}</dd></div>`).join('');
     get('product-counter').textContent = `${String(products.indexOf(product) + 1).padStart(2, '0')} / ${String(products.length).padStart(2, '0')}`;
     const dexLink = get<HTMLAnchorElement>('product-dex-link');
     dexLink.href = `${basePath}member.html?id=${product.memberId}`;
