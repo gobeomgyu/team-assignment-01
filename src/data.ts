@@ -110,6 +110,6 @@ export const members: Member[] = [
     imageSize: [532, 422],
     color: '#3986ae',
     softColor: '#eaf4f9',
-    introduction: '어디든 함께할 든든한 친구',
+    introduction: '헛소리 하나로 즐거워함',
   },
 ];
