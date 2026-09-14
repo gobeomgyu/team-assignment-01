@@ -1,4 +1,4 @@
-﻿import { imagePath } from './paths';
+import { imagePath } from './paths';
 
 export type ConemonType = 'fire' | 'grass' | 'poison' | 'water';
 
@@ -48,8 +48,8 @@ export const members: Member[] = [
     name: '한영민',
     conemonName: '규이리',
     englishName: 'CHARMANDER',
-    no: 'No. 0004',
-    desc: '꼬리의 불꽃은 기분을 나타낸다. 즐거우면 흔들리고 화가 나면 맹렬히 불타오른다.',
+    no: 'No. 0036',
+    desc: '친화력이 좋고 사람을 좋아한다.\n취미는 음악감상, 영화, 운동, 게임, 독서 등이 있다.',
     types: ['fire'],
     height: '178cm',
     category: 'ESFP',
@@ -64,7 +64,7 @@ export const members: Member[] = [
     imageSize: [325, 336],
     color: '#e66a35',
     softColor: '#fff0e6',
-    introduction: '작은 불꽃, 커다란 열정',
+    introduction: '안정형의 표본',
   },
   {
     id: 1,
@@ -110,6 +110,6 @@ export const members: Member[] = [
     imageSize: [532, 422],
     color: '#3986ae',
     softColor: '#eaf4f9',
-    introduction: '어디든 함께할 든든한 친구',
+    introduction: '헛소리 하나로 즐거워함',
   },
 ];
