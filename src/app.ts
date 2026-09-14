@@ -1,4 +1,4 @@
-import { members, typeLabels, type Member } from './data';
+  import { members, typeLabels, type Member } from './data';
 import { basePath, imagePath } from './paths';
 import { enableInterfaceSounds, playSound } from './sound';
 import { renderSectionNavigation } from './navigation';

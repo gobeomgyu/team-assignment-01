@@ -104,7 +104,7 @@ export const members: Member[] = [
     ability: '부족한',
     abilityDescription: '부족하다는 밑밥을 깔아두어 든든하다',
     extraInfo1: '인도를 가봤다',
-    extraInfo2: '개명을 한적이 있다',
+    extraInfo2: '한정훈에서 한영민으로 개명을 한적이 있다',
     extraInfo3: '야생 멧돼지를 1M 앞에서 마주친 적이 있다.',
     image: imagePath('squirtle.png'),
     imageSize: [1288, 1222],
